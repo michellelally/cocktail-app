@@ -8,6 +8,8 @@
 
 import React from 'react';
 import type {Node} from 'react';
+import Recommenadtions from './client/components/Recommendations'
+
 import {
   SafeAreaView,
   ScrollView,
@@ -62,6 +64,7 @@ const App: () => Node = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <Recommenadtions />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>

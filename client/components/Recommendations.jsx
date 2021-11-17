@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
+import {
+
+    StyleSheet,
+
+    SafeAreaView,
+
+    FlatList,
+
+    View,
+
+    Image,
+
+    TouchableOpacity
+
+} from "react-native";
 
 // This component is responsible for querying the database and returning the items that match the request
-class Recommendations extends Component {
+class Recommendations extends React.Component {
 
     state = {
         data: []
@@ -30,6 +44,8 @@ class Recommendations extends Component {
     // This method createa a React-Bootstrap Card that I got from here
     // https://react-bootstrap.github.io/components/cards/
     renderCards = (card, index) => {
+
+
         // return (
         //     <div style={styles.divContainer}>
         //         {/* creating the card and assigning it with the bootstrap class */}
@@ -51,15 +67,11 @@ class Recommendations extends Component {
 
         return (
 
-            <div>
-                {/* mapping the cocktails array to call the renderCards function for each element in the array*/}
-                <div>
-                    {/* {this.state.data.map(this.renderCards)} */}
+            <SafeAreaView>
 
-                    {this.state.data}
-                </div>
-                {/* a button that redirects you back to the homepage  */}
-            </div>
+                <FlatList data={this.state.data} />
+
+            </SafeAreaView>)
         );
     }
 };

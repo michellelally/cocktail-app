@@ -52,13 +52,15 @@ export default class App extends React.Component {
 
         this.setState({ refreshing: true });
 
-        fetch('https://api.thecatapi.com/v1/images/search?limit=10&page=1')
+        fetch('http://192.168.43.228:5000/recommend')
+       // fetch('https://api.thecatapi.com/v1/images/search?limit=10&page=1')
 
             .then(res => res.json())
 
             .then(resJson => {
 
-                this.setState({ data: resJson });
+                this.setState({ data: resJson.recommendations });
+                console.log(this.state.data)
 
                 this.setState({ refreshing: false });
 
@@ -71,7 +73,7 @@ export default class App extends React.Component {
 
         <TouchableOpacity style={styles.container}>
 
-            <Image style={styles.image} source={{ uri: data.item.url }} />
+            <Image style={styles.image} source={{ uri: data.item.image_url }} />
 
         </TouchableOpacity>
 
@@ -110,7 +112,7 @@ export default class App extends React.Component {
 
             renderItem={item => this.renderItemComponent(item)}
 
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item.book_id.toString()}
 
             ItemSeparatorComponent={this.ItemSeparator}
 

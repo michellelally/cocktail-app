@@ -13,6 +13,7 @@ import {
   SafeAreaView,
   FlatList,
   View,
+  Text,
   Image,
   TouchableOpacity
 

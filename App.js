@@ -1,154 +1,103 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-import React from "react";
 
-import {
-
-    StyleSheet,
-
-    SafeAreaView,
-
-    FlatList,
-
-    View,
-
-    Image,
-
-    TouchableOpacity
-
-} from "react-native";
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './client/components/Home'
 
 
-export default class App extends React.Component {
-
-    constructor(props) {
-
-        super(props);
-
-        this.state = {
-
-            data: [],
-
-            refreshing: true,
-
-        }
-
-    }
-
-
-    componentDidMount() {
-
-        this.fetchCats();
-
-    }
-
-
-    fetchCats() {
-
-        this.setState({ refreshing: true });
-
-        fetch('http://192.168.43.228:5000/recommend')
-       // fetch('https://api.thecatapi.com/v1/images/search?limit=10&page=1')
-
-            .then(res => res.json())
-
-            .then(resJson => {
-
-                this.setState({ data: resJson.recommendations });
-                console.log(this.state.data)
-
-                this.setState({ refreshing: false });
-
-            }).catch(e => console.log(e));
-
-    }
-
-
-    renderItemComponent = (data) =>
-
-        <TouchableOpacity style={styles.container}>
-
-            <Image style={styles.image} source={{ uri: data.item.image_url }} />
-
-        </TouchableOpacity>
-
-
-    ItemSeparator = () => <View style={{
-
-        height: 2,
-
-        backgroundColor: "rgba(0,0,0,0.5)",
-
-        marginLeft: 10,
-
-        marginRight: 10,
-
-    }}
-
-    />
-
-
-    handleRefresh = () => {
-
-        this.setState({ refreshing: false }, () => { this.fetchCats() }); // call fetchCats after setting the state
-
-    }
-
-
-    render() {
-
-      return (
-
-        <SafeAreaView>
-
-          <FlatList
-
-            data={this.state.data}
-
-            renderItem={item => this.renderItemComponent(item)}
-
-            keyExtractor={item => item.book_id.toString()}
-
-            ItemSeparatorComponent={this.ItemSeparator}
-
-            refreshing={this.state.refreshing}
-
-            onRefresh={this.handleRefresh}
-
-          />
-
-        </SafeAreaView>)
-
-    }
-
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Home></Home>
+    </View>
+  );
 }
 
+const Stack = createNativeStackNavigator();
 
-const styles = StyleSheet.create({
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
-  container: {
+export default App;
 
-    height: 300,
+// import React, { useEffect, useState } from 'react';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// import Home from './client/components/Home'
+// import ListCocktails from './client/components/ListCocktails'
 
-    margin: 10,
+// import {
+//   StyleSheet,
+//   Button,
+//   View,
+//   Text,
+// } from 'react-native';
 
-    backgroundColor: '#FFF',
+// function HomeScreen() {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Home> </Home>
+//     </View>
+//   );
+// }
 
-    borderRadius: 6,
+// const Stack = createStackNavigator();
 
-  },
+// export default function App() {
 
-  image: {
+//   return (
+//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+//       <Text>App Screen</Text>
+//       <NavigationContainer>
+//         <Stack.Navigator initialRouteName="Home">
+//           <Stack.Screen name="Home" component={Home} />
+//           <Stack.Screen name="Details" component={ListCocktails} />
+//         </Stack.Navigator>
+//       </NavigationContainer>
+//     </View>
+//   );
+// };
 
-    height: '100%',
+// const styles = StyleSheet.create({
 
-    borderRadius: 4,
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#F5F5F5'
+//   },
 
-  },
+//   activityIndicatorContainer: {
+//     backgroundColor: "#fff",
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     flex: 1,
+//   },
 
-});
+//   floatingButton: {
+//     backgroundColor: '#6B9EFA',
+//     borderColor: '#6B9EFA',
+//     height: 55,
+//     width: 55,
+//     borderRadius: 55 / 2,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     position: 'absolute',
+//     bottom: 60,
+//     right: 15,
+//     shadowColor: "#000000",
+//     shadowOpacity: 0.5,
+//     shadowRadius: 2,
+//     shadowOffset: {
+//       height: 1,
+//       width: 0
+//     }
+//   }
+// });

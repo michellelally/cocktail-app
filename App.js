@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import Recommendations from './screens/Recommendations';
-import SnowScreen from './screens/SnowScreen'
 
 
 function HomeScreen({ navigation }) {
@@ -26,15 +25,6 @@ function RecommendationsScreen({ navigation }) {
 }
 
 
-function SnowScreenScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Snow Screen</Text>
-      <SnowScreen />
-    </View>
-  );
-}
-
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -43,7 +33,6 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Recommendations" component={RecommendationsScreen} />
-        <Stack.Screen name="SnowScreen" component={SnowScreenScreen} />
       </Stack.Navigator>
 
     </NavigationContainer>

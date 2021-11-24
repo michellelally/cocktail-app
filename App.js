@@ -1,20 +1,19 @@
 import * as React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './components/Home';
-import Recommendations from './components/Recommendations';
+import Home from './screens/Home';
+import Recommendations from './screens/Recommendations';
+import SnowScreen from './screens/SnowScreen'
+
 
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Recommendations"
-        onPress={() => navigation.navigate('Recommendations')}
-      />
+      <Home />
     </View>
   );
+
 }
 
 function RecommendationsScreen({ navigation }) {
@@ -22,7 +21,17 @@ function RecommendationsScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Recommendations Screen</Text>
       <Recommendations />
-  </View>
+    </View>
+  );
+}
+
+
+function SnowScreenScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Snow Screen</Text>
+      <SnowScreen />
+    </View>
   );
 }
 
@@ -34,8 +43,9 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Recommendations" component={RecommendationsScreen} />
+        <Stack.Screen name="SnowScreen" component={SnowScreenScreen} />
       </Stack.Navigator>
-      
+
     </NavigationContainer>
   );
 }

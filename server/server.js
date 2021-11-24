@@ -6,7 +6,7 @@ var recommendations = require("./routes/recommendations");
 const app = express();
 const books = require("../data/web_book_data.json");
 const model = require("../model");
-const controller = require('../controller/controller');
+const controller = require('./controller/controller');
 const port = process.env.PORT || 5000; //Line 3
 
 //connection string
@@ -15,11 +15,11 @@ var mongoDB = 'mongodb+srv://test:test@cluster0.1xu2w.mongodb.net/harrys?retryWr
 //connecting to the database
 mongoose.connect(mongoDB);
 
-mongoose.connection.on('connected', ()=> {
+mongoose.connection.on('connected', () => {
     console.log("CONNECTION SUCCESSFUL")
 })
 
-mongoose.connection.on('error', (err)=> {
+mongoose.connection.on('error', (err) => {
     console.log("ERROR: ", err)
 })
 
@@ -49,18 +49,31 @@ var schema = new mongoose.Schema({
 var cocktailModel = mongoose.model('cocktails', schema)
 
 app.post('/api/cocktails', function (req, res) {
-    console.log("Cocktail added: " + req.body.cocktails);
-    cocktailModel.create({
+    console.log("inside create");
+    // if (!req.body) {
+    //     res.status(400).send({message: "Cannot be empty"});
+    //     return;
+    // }
+
+    //new user
+    const user = new cocktailModel({
         name: req.body.name,
         spirit: req.body.spirit,
         description: req.body.description,
         ingredients: req.body.ingredients,
         glass: req.body.glass
-    }, function (err, data) {
-        if (err)
-            res.send(err);
-        res.json(data);
     })
+
+    //save user in database 
+    user.save(user).then(data => {
+        res.send(data)
+        console.log("send data");
+    })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || 'Some error occurred while creating the cocktail'
+            });
+        });
 });
 
 app.get('/api/cocktails', function (req, res) {
@@ -89,9 +102,9 @@ app.use(bodyParser.json());
 
 app.get('/express_backend', (req, res) => { //Line 9
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
-  }); //
+}); //
 
-app.get("/recommendations", function(req, res, next) {
+app.get("/recommendations", function (req, res, next) {
 
     res.send("WELCOME TO recommendations PAGE")
 });
@@ -103,7 +116,7 @@ app.get("/recommend", (req, res) => {
     } else {
         let recs = model.recommend(userId)
             .then((recs) => {
-                res.send({recommendations: recs})
+                res.send({ recommendations: recs })
             })
     }
 

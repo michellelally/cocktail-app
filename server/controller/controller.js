@@ -1,4 +1,4 @@
-var cocktaildb = require('../model/model');
+var cocktaildb = require('../../model/model');
 
 //create and save a new cocktail
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, TouchableOpacity, Fragment } from "react";
 import {
   Text,
   View,
@@ -8,13 +8,31 @@ import {
 } from "react-native";
 import styled from "styled-components/native";
 import Video from "react-native-video";
+import questions from "../data/questions";
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+import { RowItem } from "../components/RowItem";
+import { ScrollView, StatusBar } from "react-native";
+
 const { width, height } = Dimensions.get("window");
 
-export default class Home extends Component {
-  render() {
-    return (
-      <View>
-        <Video
+
+export default function Home() {
+
+  const navigation = useNavigation();
+
+  function navigateToPreferences() {
+    navigation.navigate("Preferences", {
+      title: "Preferences",
+      questions: questions,
+      color: "#36b1f0"
+    })
+  }
+
+
+  return (
+    <View>
+      {/* <Video
           source={require("../assets/harrys.mp4")}
           style={styles.backgroundVideo}
           muted={true}
@@ -22,29 +40,30 @@ export default class Home extends Component {
           resizeMode={"cover"}
           rate={1.0}
           ignoreSilentSwitch={"obey"}
-        />
+        /> */}
 
-        <Wrapper>
-          <Logo
-            source={require("../assets/harrys.png")}
-            width={50}
-            height={50}
-            resizeMode="contain"
-          />
-          <Title>Can't decide on what to drink?</Title>
-          <TextDescription>
-            Click begin for our interactive cocktail menu!
+      <Wrapper>
+        <Logo
+          source={require("../assets/harrys.png")}
+          width={50}
+          height={50}
+          resizeMode="contain"
+        />
+        <Title>Can't decide on what to drink?</Title>
+        <TextDescription>
+          Click begin for our interactive cocktail menu!
           </TextDescription>
-          <ButtonWrapper>
-            <Fragment>
-              <Button title="Begin" />
-              <Button transparent title="Menu" />
-            </Fragment>
-          </ButtonWrapper>
-        </Wrapper>
-      </View>
-    );
-  }
+        <ButtonWrapper>
+          <Fragment>
+            <Button title="Begin"
+              onPress={() => navigateToPreferences()}
+            />
+            <Button transparent title="Menu" />
+          </Fragment>
+        </ButtonWrapper>
+      </Wrapper>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -112,7 +131,7 @@ export const StyledTitle = styled.Text`
 
 export const Button = ({ onPress, color, ...props }) => {
   return (
-    <StyledButton {...props}>
+    <StyledButton {...props} onPress={onPress}>
       <StyledTitle {...props}>{props.title}</StyledTitle>
     </StyledButton>
   );

@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
 import { Button, ButtonContainer } from "../components/Button";
 import { Alert } from "../components/Alert";
 import { useRoute, useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,8 +25,6 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
 class Preferences extends React.Component {
 
   arr = [];
@@ -42,7 +41,6 @@ class Preferences extends React.Component {
       state => {
         const nextState = { answered: true };
         this.arr.push(text);
-        console.log(this.arr);
         return nextState;
       },
       () => {

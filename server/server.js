@@ -9,6 +9,10 @@ const model = require("../model");
 const controller = require('./controller/controller');
 const port = process.env.PORT || 5000; //Line 3
 
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 //connection string
 var mongoDB = 'mongodb+srv://test:test@cluster0.1xu2w.mongodb.net/harrys?retryWrites=true&w=majority'
 
@@ -22,8 +26,6 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
     console.log("ERROR: ", err)
 })
-
-
 
 var schema = new mongoose.Schema({
     name: {
@@ -52,7 +54,7 @@ var cocktailModel = mongoose.model('cocktails', schema)
 
 app.get("/", (req, res) => {
     res.json({ message: "You need to go to bed." });
-  });
+});
 
 app.post('/api/cocktails', function (req, res) {
     console.log("inside create");
@@ -91,10 +93,12 @@ app.get('/api/cocktails', function (req, res) {
     })
 })
 
-const criteria = {spirit: "Rum", description: "Refreshing"}
 
-app.get('/api/suggestions', function (req, res) {
-    console.log("server.js app get")
+app.post('/api/suggestions', function (req, res) {
+
+    var criteria = req.body;
+    console.log("body: ", criteria);
+    // var criteria = req.body;
     cocktailModel.find(criteria, function (err, data) {
         if (err)
             res.send(err);
@@ -107,15 +111,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
 // app.set("views", path.join(__dirname), "views");
 // app.set("view engine", "ejs");
 // app.engine("html", require("ejs").renderFile);
-
-//Body parser middleware
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-);
-
-app.use(bodyParser.json());
 
 app.get('/express_backend', (req, res) => { //Line 9
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
@@ -149,16 +144,16 @@ app.delete('/api/cocktails/:id', controller.delete);
 
 
 app.get('/api/cocktails', (req, res, next) => {
-  const filters = req.query;
-  const filteredUsers = data.filter(user => {
-    let isValid = true;
-    for (spirit in filters) {
-      console.log(spirit, user[spirit], filters[spirit]);
-      isValid = isValid && user[spirit] == filters[spirit];
-    }
-    return isValid;
-  });
-  res.send(filteredUsers);
+    const filters = req.query;
+    const filteredUsers = data.filter(user => {
+        let isValid = true;
+        for (spirit in filters) {
+            console.log(spirit, user[spirit], filters[spirit]);
+            isValid = isValid && user[spirit] == filters[spirit];
+        }
+        return isValid;
+    });
+    res.send(filteredUsers);
 });
 
 module.exports = app;

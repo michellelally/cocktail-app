@@ -1,33 +1,20 @@
-import React, { useEffect, useState } from 'react';
-
-import {
-    StyleSheet,
-    Button,
-    View,
-    Text,
-} from 'react-native';
-
-export const Button = ({ text, onPress = () => { } }) => (
-    <TouchableOpacity onPress={onPress} style={[styles.box, styles.transforms]}>
-        <Text style={[styles.text, {
-            transform: [
-                { rotateZ: "-50deg" }
-            ]
-        }]}> {text}</Text>
-    </TouchableOpacity>
-);
+import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+
     },
     box: {
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
+        float: 'left',
         backgroundColor: 'violet',
-        borderRadius: 10
+        flexDirection: 'row',  
+        borderRadius: 10,
+        marginLeft: 41,
+        marginRight: 40,
+        marginTop: 43
     },
     text: {
         marginLeft: 8,
@@ -38,7 +25,17 @@ const styles = StyleSheet.create({
     },
     transforms: {
         transform: [
-            { rotateZ: "50deg" }
+            { rotateZ: "48deg" }
         ]
     }
 });
+
+export const Button = ({ text, onPress = () => { } }) => (
+    <TouchableOpacity onPress={onPress} style={[styles.box, styles.transforms]}>
+        <Text style={[styles.text, {
+            transform: [
+                { rotateZ: "-50deg" }
+            ]
+        }]}> {text}</Text>
+    </TouchableOpacity>
+);

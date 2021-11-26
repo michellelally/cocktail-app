@@ -1,7 +1,5 @@
-
-import React from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
-
 import { Button, ButtonContainer } from "../components/Button";
 import { Alert } from "../components/Alert";
 import { useRoute, useNavigation } from '@react-navigation/native';
@@ -26,32 +24,29 @@ const styles = StyleSheet.create({
   }
 });
 
+
+
 class Preferences extends React.Component {
 
+  arr = [];
+
   state = {
-    correctCount: 0,
-    totalCount: 2,
     activeQuestionIndex: 0,
     answered: false,
-    answerCorrect: false
+    totalCount: 2
   };
 
-  answer = correct => {
+
+  answer = text => {
     this.setState(
       state => {
         const nextState = { answered: true };
-
-        if (correct) {
-          nextState.correctCount = state.correctCount + 1;
-          nextState.answerCorrect = true;
-        } else {
-          nextState.answerCorrect = false;
-        }
-
+        this.arr.push(text);
+        console.log(this.arr);
         return nextState;
       },
       () => {
-        setTimeout(() => this.nextQuestion(), 750);
+        this.nextQuestion();
       }
     );
   };
@@ -61,7 +56,9 @@ class Preferences extends React.Component {
       const nextIndex = state.activeQuestionIndex + 1;
 
       if (nextIndex >= state.totalCount) {
-        return this.props.navigation.popToTop();
+        return this.props.navigation.navigate("DisplayCocktails", {
+          preferences: this.arr
+        });
       }
 
       return {
@@ -74,8 +71,6 @@ class Preferences extends React.Component {
   render() {
 
     const questions = this.props.route.params.questions;
-
-    // const questions = this.props.navigation.getParam("questions", []);
     const question = questions[this.state.activeQuestionIndex];
 
     return (
@@ -88,26 +83,17 @@ class Preferences extends React.Component {
         <SafeAreaView style={styles.safearea}>
           <View>
             <Text style={styles.text}>{question.question}</Text>
-
             <ButtonContainer>
               {question.answers.map(answer => (
                 <Button
                   key={answer.id}
                   text={answer.text}
-                  onPress={() => this.answer(answer.correct)}
+                  onPress={() => this.answer(answer.text)}
                 />
               ))}
             </ButtonContainer>
           </View>
-
-          <Text style={styles.text}>
-            {`${this.state.correctCount}/${this.state.totalCount}`}
-          </Text>
         </SafeAreaView>
-        <Alert
-          correct={this.state.answerCorrect}
-          visible={this.state.answered}
-        />
       </View>
     );
   }

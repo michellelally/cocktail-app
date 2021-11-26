@@ -4,7 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home'
 import Preferences from './screens/Preferences'
 import Dashboard from './screens/dashboard'
-
+import Grid from './screens/GridTest'
+import DisplayCocktails from './screens/DisplayCocktails';
 
 const AppStack = createStackNavigator();
 export default function Navigator() {
@@ -14,7 +15,10 @@ export default function Navigator() {
       <AppStack.Navigator screenOptions={{ headerShown: true }} >
         <AppStack.Screen name="Home" component={Home} />
         <AppStack.Screen name="Dashboard" component={Dashboard} />
+        <AppStack.Screen name="Grid" component={Grid} />
         <AppStack.Screen name="Preferences" component={Preferences} />
+        <AppStack.Screen name="DisplayCocktails" component={DisplayCocktails} />
+
       </AppStack.Navigator>
     </NavigationContainer>
   );

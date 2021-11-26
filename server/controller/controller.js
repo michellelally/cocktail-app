@@ -34,7 +34,18 @@ exports.create = (req, res) => {
 
 // retrieve and return all users/a single user
 exports.find = (req, res) => {
+    console.log("find");
     cocktaildb.find().then(cocktails => {
+        res.send(user)
+    }).catch(err => {
+        res.status(500).send({message: err.message || 'Error occured'});
+    })
+
+}
+
+const criteria = {spirit: "Vodka", description: "Refreshing"}
+exports.query = (req, res) => {
+    cocktails.find(criteria).then(cocktails => {
         res.send(user)
     }).catch(err => {
         res.status(500).send({message: err.message || 'Error occured'});
@@ -49,3 +60,15 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
 
 }
+
+exports.filter = (req,res) => {
+
+}
+
+// app.get('/api/cocktails?name=${}', function (req, res) {
+//     cocktailModel.find(function (err, data) {
+//         if (err)
+//             res.send(err);
+//         res.json(data);
+//     })
+// })

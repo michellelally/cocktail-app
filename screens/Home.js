@@ -21,6 +21,10 @@ export default function Home() {
 
   const navigation = useNavigation();
 
+  function navigateToGrid() {
+    navigation.navigate("Grid")
+  }
+
   function navigateToPreferences() {
     navigation.navigate("Preferences", {
       title: "Preferences",
@@ -58,7 +62,9 @@ export default function Home() {
             <Button title="Begin"
               onPress={() => navigateToPreferences()}
             />
-            <Button transparent title="Menu" />
+            <Button transparent title="Menu"
+              onPress={() => navigateToGrid()}
+            />
           </Fragment>
         </ButtonWrapper>
       </Wrapper>

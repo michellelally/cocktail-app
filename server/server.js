@@ -23,6 +23,8 @@ mongoose.connection.on('error', (err) => {
     console.log("ERROR: ", err)
 })
 
+
+
 var schema = new mongoose.Schema({
     name: {
         type: String,
@@ -47,6 +49,10 @@ var schema = new mongoose.Schema({
 })
 
 var cocktailModel = mongoose.model('cocktails', schema)
+
+app.get("/", (req, res) => {
+    res.json({ message: "You need to go to bed." });
+  });
 
 app.post('/api/cocktails', function (req, res) {
     console.log("inside create");
@@ -77,6 +83,7 @@ app.post('/api/cocktails', function (req, res) {
 });
 
 app.get('/api/cocktails', function (req, res) {
+    console.log("server.js app get")
     cocktailModel.find(function (err, data) {
         if (err)
             res.send(err);
@@ -84,6 +91,16 @@ app.get('/api/cocktails', function (req, res) {
     })
 })
 
+const criteria = {spirit: "Rum", description: "Refreshing"}
+
+app.get('/api/suggestions', function (req, res) {
+    console.log("server.js app get")
+    cocktailModel.find(criteria, function (err, data) {
+        if (err)
+            res.send(err);
+        res.json(data);
+    })
+})
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
 
@@ -122,9 +139,26 @@ app.get("/recommend", (req, res) => {
 
 });
 
+const spirit = "Vodka"
 app.post('/api/cocktails', controller.create);
 app.get('/api/cocktails', controller.find);
 app.put('/api/cocktails/:id', controller.update);
 app.delete('/api/cocktails/:id', controller.delete);
+
+// app.get(`/api/cocktails?`, controller.find);
+
+
+app.get('/api/cocktails', (req, res, next) => {
+  const filters = req.query;
+  const filteredUsers = data.filter(user => {
+    let isValid = true;
+    for (spirit in filters) {
+      console.log(spirit, user[spirit], filters[spirit]);
+      isValid = isValid && user[spirit] == filters[spirit];
+    }
+    return isValid;
+  });
+  res.send(filteredUsers);
+});
 
 module.exports = app;

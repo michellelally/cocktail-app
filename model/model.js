@@ -23,6 +23,6 @@ var schema = new mongoose.Schema({
     }
 })
 
-const cocktaildb = mongoose.model('cocktaildb', schema);
+const cocktaildb = mongoose.model('cocktail', schema);
 
 module.exports = cocktaildb;

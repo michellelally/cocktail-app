@@ -8,7 +8,6 @@
 import React from "react";
 
 import {
-
   StyleSheet,
   SafeAreaView,
   FlatList,
@@ -16,7 +15,6 @@ import {
   Text,
   Image,
   TouchableOpacity
-
 } from "react-native";
 
 

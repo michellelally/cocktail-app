@@ -22,7 +22,6 @@ class DisplayCocktails extends React.Component {
     }
 
     fectchCocktails() {
-
         const url = "http://192.168.43.228:5000/api/suggestions";
 
         const data = {
@@ -33,7 +32,6 @@ class DisplayCocktails extends React.Component {
         axios.post(url, data)
             .then(res => {
                 this.setState({ cocktails: res.data });
-                console.log("this.state.cocktails", this.state.cocktails);
             })
             .catch(err => console.log(err.data))
     }

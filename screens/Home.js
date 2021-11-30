@@ -22,7 +22,7 @@ export default function Home() {
   const navigation = useNavigation();
 
   function navigateToGrid() {
-    navigation.navigate("Grid")
+    navigation.navigate("ListCocktails")
   }
 
   function navigateToPreferences() {

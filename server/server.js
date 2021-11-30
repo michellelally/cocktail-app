@@ -53,7 +53,7 @@ var schema = new mongoose.Schema({
 var cocktailModel = mongoose.model('cocktails', schema)
 
 app.get("/", (req, res) => {
-    res.json({ message: "You need to go to bed." });
+    res.json({ message: "express server" });
 });
 
 app.post('/api/cocktails', function (req, res) {
@@ -85,14 +85,12 @@ app.post('/api/cocktails', function (req, res) {
 });
 
 app.get('/api/cocktails', function (req, res) {
-    console.log("server.js app get")
     cocktailModel.find(function (err, data) {
         if (err)
             res.send(err);
         res.json(data);
     })
 })
-
 
 app.post('/api/suggestions', function (req, res) {
 
@@ -107,19 +105,6 @@ app.post('/api/suggestions', function (req, res) {
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
-
-// app.set("views", path.join(__dirname), "views");
-// app.set("view engine", "ejs");
-// app.engine("html", require("ejs").renderFile);
-
-app.get('/express_backend', (req, res) => { //Line 9
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
-}); //
-
-app.get("/recommendations", function (req, res, next) {
-
-    res.send("WELCOME TO recommendations PAGE")
-});
 
 app.get("/recommend", (req, res) => {
     let userId = 40;
@@ -140,20 +125,5 @@ app.get('/api/cocktails', controller.find);
 app.put('/api/cocktails/:id', controller.update);
 app.delete('/api/cocktails/:id', controller.delete);
 
-// app.get(`/api/cocktails?`, controller.find);
-
-
-app.get('/api/cocktails', (req, res, next) => {
-    const filters = req.query;
-    const filteredUsers = data.filter(user => {
-        let isValid = true;
-        for (spirit in filters) {
-            console.log(spirit, user[spirit], filters[spirit]);
-            isValid = isValid && user[spirit] == filters[spirit];
-        }
-        return isValid;
-    });
-    res.send(filteredUsers);
-});
 
 module.exports = app;

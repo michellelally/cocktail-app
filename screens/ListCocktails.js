@@ -36,7 +36,13 @@ export default class SwipeoutDemo extends React.Component {
 
 
   edit() {
-    console.log("edit pressed")
+    // axios.put('http://localhost:5050/api/update-todo/' + this.taskObj._id, this.taskObj)
+    // .then((res) => {
+    //   console.log('Todo updated' + res)
+    //   this.refreshPage()
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
   }
 
   delete() {

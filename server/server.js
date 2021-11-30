@@ -92,6 +92,21 @@ app.get('/api/cocktails', function (req, res) {
     })
 })
 
+
+app.put('/api/cocktails/:id', function (req, res) {
+    console.log("ID: ", req.params._i);
+    console.log("Body: ", req.body);
+
+    cocktailModel.findByIdAndUpdate(req.params.id, req.body,
+        function (err, data) {
+            if (err) {
+                console.log(err);
+            }
+            console.log(data);
+            res.json(data);
+        });
+})
+
 app.post('/api/suggestions', function (req, res) {
 
     var criteria = req.body;

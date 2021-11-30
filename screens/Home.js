@@ -22,7 +22,7 @@ export default function Home() {
   const navigation = useNavigation();
 
   function navigateToGrid() {
-    navigation.navigate("ListCocktails")
+    navigation.navigate("AddCocktail")
   }
 
   function navigateToPreferences() {
@@ -98,7 +98,6 @@ export const Logo = styled.Image`
   height: 100px;
 `;
 export const TextDescription = styled.Text`
-  letter-spacing: 3;
   color: #f4f4f4;
   text-align: center;
   text-transform: uppercase;
@@ -116,7 +115,6 @@ export const Title = styled.Text`
   text-align: center;
   font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 3;
 `;
 const StyledButton = styled.TouchableHighlight`
  width:250px;
@@ -131,7 +129,6 @@ export const StyledTitle = styled.Text`
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
-  letter-spacing: 3;
   color: ${props => (props.transparent ? "#f3f8ff " : "#666")};
 `;
 

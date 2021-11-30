@@ -4,9 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home'
 import Preferences from './screens/Preferences'
 import Dashboard from './screens/dashboard'
-import Grid from './screens/GridTest'
 import DisplayCocktails from './screens/DisplayCocktails';
 import ListCocktails from './screens/ListCocktails';
+import AddCocktail from './screens/AddCocktail';
 
 const AppStack = createStackNavigator();
 export default function Navigator() {
@@ -19,6 +19,7 @@ export default function Navigator() {
         <AppStack.Screen name="ListCocktails" component={ListCocktails} />
         <AppStack.Screen name="Preferences" component={Preferences} />
         <AppStack.Screen name="DisplayCocktails" component={DisplayCocktails} />
+        <AppStack.Screen name="AddCocktail" component={AddCocktail} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

@@ -7,6 +7,8 @@ import Dashboard from './screens/dashboard'
 import DisplayCocktails from './screens/DisplayCocktails';
 import ListCocktails from './screens/ListCocktails';
 import AddCocktail from './screens/AddCocktail';
+import UpdateCocktail from './screens/UpdateCocktail'
+
 
 const AppStack = createStackNavigator();
 export default function Navigator() {
@@ -20,6 +22,7 @@ export default function Navigator() {
         <AppStack.Screen name="Preferences" component={Preferences} />
         <AppStack.Screen name="DisplayCocktails" component={DisplayCocktails} />
         <AppStack.Screen name="AddCocktail" component={AddCocktail} />
+        <AppStack.Screen name="UpdateCocktail" component={UpdateCocktail} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

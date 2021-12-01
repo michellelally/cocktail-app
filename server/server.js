@@ -54,15 +54,15 @@ var schema = new mongoose.Schema({
 
 var cocktailModel = mongoose.model('cocktails', schema)
 
-app.get("/", (req, res) => {
-    const cocktail = new cocktailModel({ name: "test", spirit: "test", description: "test", ingredients: "test", glass: "test" })
-    try {
-        cocktail.save();
-        res.send("inserted data");
-    } catch (err) {
-        console.log(err);
-    }
-});
+// app.get("/", (req, res) => {
+//     const cocktail = new cocktailModel({ name: "test", spirit: "test", description: "test", ingredients: "test", glass: "test" })
+//     try {
+//         cocktail.save();
+//         res.send("inserted data");
+//     } catch (err) {
+//         console.log(err);
+//     }
+// });
 
 app.post('/api/insert', function (req, res) {
     console.log("inside insert");
@@ -107,12 +107,21 @@ app.get('/api/cocktails', function (req, res) {
     })
 })
 
+app.post('/api/cocktail', function (req, res) {
+    const id = req.body.key;
+    console.log("Read cocktail: ", id);
+    cocktailModel.findById(id,
+        function (err, data) {
+            res.json(data);
+        });
+})
 
-app.put('/api/cocktails/:id', function (req, res) {
-    console.log("ID: ", req.params._i);
+
+app.put('/api/update', function (req, res) {
+    console.log("ID: ", req.body._id);
     console.log("Body: ", req.body);
 
-    cocktailModel.findByIdAndUpdate(req.params.id, req.body,
+    cocktailModel.findByIdAndUpdate(req.body._id, req.body,
         function (err, data) {
             if (err) {
                 console.log(err);
@@ -122,8 +131,24 @@ app.put('/api/cocktails/:id', function (req, res) {
         });
 })
 
-app.post('/api/suggestions', function (req, res) {
+/*
+router.route('/update-student/:id').put((req, res, next) => {
+    studentSchema.findByIdAndUpdate(req.params.id, {
+      $set: req.body
+    }, (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error)
+      } else {
+        res.json(data)
+        console.log('Student updated successfully !')
+      }
+    })
+  })
 
+*/
+
+app.post('/api/suggestions', function (req, res) {
     var criteria = req.body;
     console.log("body: ", criteria);
     // var criteria = req.body;

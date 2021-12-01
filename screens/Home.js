@@ -21,8 +21,8 @@ export default function Home() {
 
   const navigation = useNavigation();
 
-  function navigateToGrid() {
-    navigation.navigate("AddCocktail")
+  function navigateToMenu() {
+    navigation.navigate("ListCocktails")
   }
 
   function navigateToPreferences() {
@@ -63,7 +63,7 @@ export default function Home() {
               onPress={() => navigateToPreferences()}
             />
             <Button transparent title="Menu"
-              onPress={() => navigateToGrid()}
+              onPress={() => navigateToMenu()}
             />
           </Fragment>
         </ButtonWrapper>

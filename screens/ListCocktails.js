@@ -12,6 +12,9 @@ import {
 import Swipeout from 'react-native-swipeout';
 import axios from 'axios';
 
+import { useNavigation } from '@react-navigation/native';
+
+
 export default class SwipeoutDemo extends React.Component {
 
   state = {
@@ -34,15 +37,11 @@ export default class SwipeoutDemo extends React.Component {
       .catch(err => console.log(err.data))
   }
 
-
-  edit() {
-    // axios.put('http://localhost:5050/api/update-todo/' + this.taskObj._id, this.taskObj)
-    // .then((res) => {
-    //   console.log('Todo updated' + res)
-    //   this.refreshPage()
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
+  navigateToUpdate(key) {
+    this.props.navigation.navigate("UpdateCocktail", {
+      title: "UpdateCocktail",
+      key: key
+    })
   }
 
   delete() {
@@ -51,20 +50,16 @@ export default class SwipeoutDemo extends React.Component {
 
   swipeoutBtns = [
     {
-      text: 'Edit',
-      onPress: () => this.edit(),
-      type: 'primary'
-    },
-    {
       text: 'Delete',
       onPress: () => this.delete(),
       type: 'delete'
     }
   ]
+
   renderItemComponent = (data) =>
     <Swipeout right={this.swipeoutBtns} autoClose style={styles.container}>
-      <TouchableOpacity style={styles.container}>
-        <Text style={styles.itemText}> {data.item.name}</Text>
+      <TouchableOpacity style={styles.container} onPress={() => this.navigateToUpdate(data.item._id)}>
+        <Text style={styles.itemText}> {data.item.name} </Text>
       </TouchableOpacity>
     </Swipeout>
 

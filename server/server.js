@@ -8,10 +8,12 @@ const books = require("../data/web_book_data.json");
 const model = require("../model");
 const controller = require('./controller/controller');
 const port = process.env.PORT || 5000; //Line 3
-
+const cors = require('cors');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(cors());
 
 //connection string
 var mongoDB = 'mongodb+srv://test:test@cluster0.1xu2w.mongodb.net/harrys?retryWrites=true&w=majority'
@@ -53,18 +55,24 @@ var schema = new mongoose.Schema({
 var cocktailModel = mongoose.model('cocktails', schema)
 
 app.get("/", (req, res) => {
-    res.json({ message: "express server" });
+    const cocktail = new cocktailModel({ name: "test", spirit: "test", description: "test", ingredients: "test", glass: "test" })
+    try {
+        cocktail.save();
+        res.send("inserted data");
+    } catch (err) {
+        console.log(err);
+    }
 });
 
-app.post('/api/cocktails', function (req, res) {
-    console.log("inside create");
-    // if (!req.body) {
-    //     res.status(400).send({message: "Cannot be empty"});
-    //     return;
-    // }
+app.post('/api/insert', function (req, res) {
+    console.log("inside insert");
+    if (!req.body) {
+        res.status(400).send({message: "Cannot be empty"});
+        return;
+    }
 
     //new user
-    const user = new cocktailModel({
+    const cocktail = new cocktailModel({
         name: req.body.name,
         spirit: req.body.spirit,
         description: req.body.description,
@@ -72,16 +80,23 @@ app.post('/api/cocktails', function (req, res) {
         glass: req.body.glass
     })
 
+    try {
+        cocktail.save();
+        res.send("inserted data");
+    } catch (err) {
+        console.log(err);
+    }
+
     //save user in database 
-    user.save(user).then(data => {
-        res.send(data)
-        console.log("send data");
-    })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || 'Some error occurred while creating the cocktail'
-            });
-        });
+    // user.save(user).then(data => {
+    //     res.send(data)
+    //     console.log("");
+    // })
+    //     .catch(err => {
+    //         res.status(500).send({
+    //             message: err.message || 'Some error occurred while creating the cocktail'
+    //         });
+    //     });
 });
 
 app.get('/api/cocktails', function (req, res) {

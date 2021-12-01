@@ -34,6 +34,13 @@ export default class AddCocktail extends React.Component {
 
     submit = (name, spirit, description, ingredients, glass) => {
         console.log(name + ' ' + spirit + ' ' + description + ' ' + ingredients + ' ' + glass)
+        axios.post('http://192.168.43.228:5000/api/insert', {
+            name: name,
+            spirit: spirit,
+            description: description,
+            ingredients: ingredients,
+            glass: glass
+        })
     }
     render() {
         return (
@@ -49,6 +56,7 @@ export default class AddCocktail extends React.Component {
                     onValueChange={(itemValue, itemIndex) =>
                         this.setState({ spirit: itemValue })
                     }>
+                    <Picker.Item label="Select a spirit" />
                     <Picker.Item label="Vodka" value="Vodka" />
                     <Picker.Item label="Whiskey" value="Whiskey" />
                     <Picker.Item label="Rum" value="Rum" />
@@ -62,6 +70,7 @@ export default class AddCocktail extends React.Component {
                     onValueChange={(itemValue, itemIndex) =>
                         this.setState({ description: itemValue })
                     }>
+                    <Picker.Item label="Select a flavour description" />
                     <Picker.Item label="Sweet" value="Sweet" />
                     <Picker.Item label="Refreshing" value="Refreshing" />
                     <Picker.Item label="Sour" value="Sour" />
@@ -81,6 +90,7 @@ export default class AddCocktail extends React.Component {
                     onValueChange={(itemValue, itemIndex) =>
                         this.setState({ glass: itemValue })
                     }>
+                    <Picker.Item label="Select a glass" />
                     <Picker.Item label="Coupe" value="Coupe" />
                     <Picker.Item label="Tikki" value="Tikki" />
                     <Picker.Item label="Collins" value="Collins" />
@@ -99,92 +109,6 @@ export default class AddCocktail extends React.Component {
             </View>
         )
     }
-
-
-
-    //     <TextInput style={styles.input}
-    //     placeholder="Enter name"
-    //     style={styles.inputBox}
-    //     onChangeText={this.handleName} />
-
-    // <Picker
-    //     selectedValue={this.state.spirit}
-    //     style={styles.inputBox}
-    //     onValueChange={(itemValue, itemIndex) =>
-    //         this.setState({ spirit: itemValue })
-    //     }>
-    //     <Picker.Item label="Vodka" value="Vodka" />
-    //     <Picker.Item label="Whiskey" value="Whiskey" />
-    //     <Picker.Item label="Rum" value="Rum" />
-    //     <Picker.Item label="Gin" value="Gin" />
-    //     <Picker.Item label="Other" value="Other" />
-    // </Picker>
-
-
-
-    // <TextInput style={styles.input}
-    //     placeholder="Enter Ingredients"
-    //     style={styles.inputBox}
-    //     onChangeText={this.handleIngredients} />
-
-
-
-
-
-
-    // // constructor() {
-    // //     super();
-    // //     this.state = {
-    // //         name: '',
-    // //         spirit: '',
-    // //         description: '',
-    // //         ingredients: '',
-    // //         glass: ''
-    // //     };
-    // // }
-
-    // submitData() {
-    //     console.log("data submitted")
-    //     console.log("name: ", this.state.name);
-    //     // console.warn(this.state)
-    //     // console.log(this.state.name, " ", this.state.spirit + " " + this.state.ingredients + " " )
-    // }
-
-    // render() {
-    //     return (
-    //         <View>
-    //             <View>
-    //                 <TextInput
-    //                     onChangeText={text => this.setState({ name: text })}
-    //                     value={this.state.name}
-    //                     placeholder="enter here"
-    //                 />
-    //             </View>
-    //             {/* <TextInput
-    //                 placeholder="Enter Name"
-    //                 style={styles.inputBox}
-    //                 onChangeText={(text) => {
-    //                     this.setState({ name: text })
-    //                     console.log("name:", this.state.name)
-
-    //                 }}
-    //             />
-
-
-    //             <TextInput
-    //                 placeholder="Enter Ingredients"
-    //                 style={styles.inputBox}
-    //                 onChangeText={(text) => {
-    //                     this.setState({ ingredients: text })
-    //                     console.log(this.state.ingredients)
-    //                 }}
-    //             />
-
-    //             */}
-    //             <Button title="Submit" onPress={this.submitData}></Button>
-    //         </View>
-    //     )
-    // }
 }
 
 const styles = StyleSheet.create({

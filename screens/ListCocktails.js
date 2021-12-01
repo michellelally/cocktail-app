@@ -28,7 +28,6 @@ export default class SwipeoutDemo extends React.Component {
   fectchCocktails() {
     const url = "http://192.168.43.228:5000/api/cocktails";
 
-
     axios.get(url)
       .then(res => {
         this.setState({ cocktails: res.data });
@@ -44,20 +43,34 @@ export default class SwipeoutDemo extends React.Component {
     })
   }
 
-  delete() {
+  delete(item) {
     console.log("delete pressed")
+    console.log(item)
+    // const data = {
+    //   id: id
+    // }
+
+    // const url = `http://192.168.43.228:5000/api/delete/${id}`
+
+    // axios.delete(url, data)
+    //   .then(res => {
+    //     console.log(res.data)
+    //   })
+    //   .catch(err => console.log(err.data));
   }
 
-  swipeoutBtns = [
-    {
-      text: 'Delete',
-      onPress: () => this.delete(),
-      type: 'delete'
-    }
-  ]
+  swipeoutBtns(item) {
+    return [
+      {
+        text: 'Delete',
+        onPress: () => this.delete(item),
+        type: 'delete',
+      }
+    ]
+  }
 
   renderItemComponent = (data) =>
-    <Swipeout right={this.swipeoutBtns} autoClose style={styles.container}>
+    <Swipeout right={this.swipeoutBtns(item)} autoClose style={styles.container}>
       <TouchableOpacity style={styles.container} onPress={() => this.navigateToUpdate(data.item._id)}>
         <Text style={styles.itemText}> {data.item.name} </Text>
       </TouchableOpacity>
@@ -69,7 +82,7 @@ export default class SwipeoutDemo extends React.Component {
         <FlatList
           data={this.state.cocktails}
           renderItem={item => this.renderItemComponent(item)}
-          style={{ padding: 75 }}
+          style={{ paddingTop: 10, paddingLeft: 50, paddingRight: 50 }}
         />
       </SafeAreaView>)
   }
@@ -78,9 +91,9 @@ export default class SwipeoutDemo extends React.Component {
 const styles = StyleSheet.create({
   container: {
     height: 50,
-    margin: 3,
     backgroundColor: '#FFF',
     borderRadius: 6,
+    margin: 2
   },
   itemText: {
     fontSize: 25,

@@ -131,6 +131,19 @@ app.put('/api/update', function (req, res) {
         });
 })
 
+app.delete('/api/delete/:id', function(req, res){
+    console.log("ID: ", req.body._id);
+    console.log("Body: ", req.body);
+
+    cocktailModel.deleteOne({ _id: req.body._id },
+        function (err, data) {
+            if (err)
+                res.send(err);
+            res.json(data);//send back 
+        });
+
+})
+
 /*
 router.route('/update-student/:id').put((req, res, next) => {
     studentSchema.findByIdAndUpdate(req.params.id, {

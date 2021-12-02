@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useNavigation } from '@react-navigation/native';
 import {
     Text,
     StyleSheet,
@@ -40,12 +40,12 @@ export default class UpdateCocktail extends React.Component {
 
         axios.post(url, data)
             .then(res => {
-                this.setState({ name: res.data.name})
-                this.setState({ spirit: res.data.spirit});
-                this.setState({ description: res.data.description});
-                this.setState({ ingredients: res.data.ingredients});
-                this.setState({glass: res.data.glass });
-                this.setState({ _id: res.data._id});
+                this.setState({ name: res.data.name })
+                this.setState({ spirit: res.data.spirit });
+                this.setState({ description: res.data.description });
+                this.setState({ ingredients: res.data.ingredients });
+                this.setState({ glass: res.data.glass });
+                this.setState({ _id: res.data._id });
                 console.log(this.state._id);
                 this.handleName(res.data.name);
                 this.handleIngredients(res.data.ingredients);
@@ -77,6 +77,7 @@ export default class UpdateCocktail extends React.Component {
             glass: glass,
             _id: id
         })
+        this.props.navigation.goBack()
     }
     render() {
         return (

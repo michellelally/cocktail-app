@@ -132,10 +132,11 @@ app.put('/api/update', function (req, res) {
 })
 
 app.delete('/api/delete/:id', function(req, res){
-    console.log("ID: ", req.body._id);
-    console.log("Body: ", req.body);
+    console.log("Delete")
+    const id = req.params.id
+    console.log("ID: ", id);
 
-    cocktailModel.deleteOne({ _id: req.body._id },
+    cocktailModel.deleteOne({ _id: id },
         function (err, data) {
             if (err)
                 res.send(err);

@@ -14,7 +14,6 @@ import axios from 'axios';
 
 import { useNavigation } from '@react-navigation/native';
 
-
 export default class SwipeoutDemo extends React.Component {
 
   state = {
@@ -43,20 +42,24 @@ export default class SwipeoutDemo extends React.Component {
     })
   }
 
-  delete(item) {
+  delete(cocktail) {
     console.log("delete pressed")
-    console.log(item)
-    // const data = {
-    //   id: id
-    // }
+    console.log(cocktail.item._id)
+    const data = {
+      id: cocktail.item._id
+    }
 
-    // const url = `http://192.168.43.228:5000/api/delete/${id}`
+    console.log(data)
+    const url = `http://192.168.43.228:5000/api/delete/${data.id}`
 
-    // axios.delete(url, data)
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
-    //   .catch(err => console.log(err.data));
+    console.log(url);
+    axios.delete(url, data)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => console.log(err.data));
+
+    this.fectchCocktails();
   }
 
   swipeoutBtns(item) {
@@ -70,7 +73,7 @@ export default class SwipeoutDemo extends React.Component {
   }
 
   renderItemComponent = (data) =>
-    <Swipeout right={this.swipeoutBtns(item)} autoClose style={styles.container}>
+    <Swipeout right={this.swipeoutBtns(data)} autoClose style={styles.container}>
       <TouchableOpacity style={styles.container} onPress={() => this.navigateToUpdate(data.item._id)}>
         <Text style={styles.itemText}> {data.item.name} </Text>
       </TouchableOpacity>

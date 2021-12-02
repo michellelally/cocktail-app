@@ -11,7 +11,6 @@ import axios from 'axios';
 
 
 class Menu extends React.Component {
-    preferences = this.props.route.params.preferences;
 
     state = {
         cocktails: []
@@ -37,13 +36,6 @@ class Menu extends React.Component {
             <Text> {data.item.name}</Text>
         </TouchableOpacity>
 
-    ItemSeparator = () => <View style={{
-        height: 2,
-        backgroundColor: "rgba(0,0,0,0.5)",
-        marginLeft: 10,
-        marginRight: 10,
-    }}
-    />
 
     render() {
         return (
@@ -51,8 +43,6 @@ class Menu extends React.Component {
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
-                    // keyExtractor={item => item.id.toString()}
-                    ItemSeparatorComponent={this.ItemSeparator}
                 />
             </SafeAreaView>)
     }

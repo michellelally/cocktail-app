@@ -10,9 +10,10 @@ import styled from "styled-components/native";
 import Video from "react-native-video";
 import questions from "../data/questions";
 import { useNavigation, useRoute } from '@react-navigation/native';
-
+import { createStackNavigator } from '@react-navigation/stack';
 import { RowItem } from "../components/RowItem";
 import { ScrollView, StatusBar } from "react-native";
+import Footer from '../components/Footer'
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,7 +22,7 @@ export default function Home() {
   const navigation = useNavigation();
 
   function navigateToMenu() {
-    navigation.navigate("ListCocktails")
+    navigation.navigate("ListCocktails");
   }
 
   function navigateToPreferences() {
@@ -66,6 +67,11 @@ export default function Home() {
           </Fragment>
         </ButtonWrapper>
       </Wrapper>
+
+    {/* <NavigationContainer>
+      <Footer></Footer>
+    </NavigationContainer> */}
+    {/* <Footer/> */}
     </View>
   );
 }

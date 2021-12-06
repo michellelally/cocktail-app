@@ -1,67 +1,16 @@
-// import React from 'react';
-// import { Text } from 'react-native';
-// import { createStackNavigator } from '@react-navigation/stack';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import Menu from './screens/Menu'
-// import Home from './screens/Home'
-// import Dashboard from './screens/dashboard'
-
-
-// const Stack = createStackNavigator();
-// const Tab = createBottomTabNavigator();
-
-
-// function Scr() {
-//   return <Text>hello</Text>;
-// }
-// function MyTabs() {
-//   return (
-//     <Tab.Navigator
-//       initialRouteName="Home"
-//       tabBarOptions={{
-//         activeTintColor: '#414757',
-//       }}>
-//       <Tab.Screen name="Home" component={Home} />
-//       <Tab.Screen name="Menu" component={Menu} />
-//       <Tab.Screen name="Login" component={Dashboard} />
-
-//     </Tab.Navigator>
-//   );
-// }
-
-// export default function Routing() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator>
-//         <Stack.Screen
-//           name="login"
-//           component={Scr}
-//           options={{ header: () => null }}
-//         />
-//         <Stack.Screen
-//           name="dashboard"
-//           component={MyTabs}
-//           options={{ header: () => null }}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Home from './screens/Home'
-import Preferences from './screens/Preferences'
-import Dashboard from './screens/dashboard'
-import DisplayCocktails from './screens/DisplayCocktails';
-import ListCocktails from './screens/ListCocktails';
-import AddCocktail from './screens/AddCocktail';
-import UpdateCocktail from './screens/UpdateCocktail'
-import Menu from './screens/Menu'
-import Footer from './components/Footer'
-import Login from './screens/Login'
+import Home from './app/screens/Home'
+import Preferences from './app/screens/Preferences'
+import Dashboard from './app/screens/dashboard'
+import DisplayCocktails from './app/screens/DisplayCocktails';
+import ListCocktails from './app/screens/ListCocktails';
+import AddCocktail from './app/screens/AddCocktail';
+import UpdateCocktail from './app/screens/UpdateCocktail'
+import Menu from './app/screens/Menu'
+import Login from './app/screens/Login'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 

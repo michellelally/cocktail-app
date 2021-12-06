@@ -9,7 +9,6 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-import pic from '../assets/images/collins.png';
 
 class DisplayCocktails extends React.Component {
     preferences = this.props.route.params.preferences;
@@ -40,8 +39,6 @@ class DisplayCocktails extends React.Component {
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container}>
             <Text> {data.item.name}</Text>
-            <Text> {data.item.glass}</Text>
-            <Image style={styles.image} source={{ uri: data.item.glass }} />
         </TouchableOpacity>
 
 
@@ -51,7 +48,7 @@ class DisplayCocktails extends React.Component {
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
-                // keyExtractor={item => item.id.toString()}
+                    // keyExtractor={item => item.id.toString()}
                 />
             </SafeAreaView>)
     }
@@ -66,8 +63,7 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        height: '10%',
-
+        height: '100%',
         borderRadius: 4,
     },
 });

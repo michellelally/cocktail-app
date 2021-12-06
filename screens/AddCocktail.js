@@ -32,19 +32,33 @@ export default class AddCocktail extends React.Component {
         this.setState({ ingredients: text })
     }
 
-    submit = (name, spirit, description, ingredients, glass) => {
-        console.log(name + ' ' + spirit + ' ' + description + ' ' + ingredients + ' ' + glass)
-        axios.post('http://192.168.43.228:5000/api/insert', {
-            name: name,
-            spirit: spirit,
-            description: description,
-            ingredients: ingredients,
-            glass: glass
-        })
+    isValid(name, spirit, description, ingredients, glass) {
+        console.log(this.state)
+        if (name != '' && spirit != '' && description != '' && ingredients != '' && glass != '') {
+            this.submit()
+        } else {
+            alert("Fields cannot be blank")
+        }
     }
+
+    submit = () => {
+        axios.post('http://192.168.43.228:5000/api/insert', {
+            name: this.state.name,
+            spirit: this.state.spirit,
+            description: this.state.description,
+            ingredients: this.state.ingredients,
+            glass: this.state.glass
+        })
+        .then(res => {
+            console.log("res: ", res.data.inserted)
+        })
+        this.props.navigation.navigate("ListCocktails");
+    }
+
     render() {
         return (
             <View style={styles.container}>
+                <Text style={styles.error}>{this.state.error}</Text>
                 <TextInput style={styles.inputBox}
                     placeholder="Enter name"
                     onChangeText={this.handleName}
@@ -102,7 +116,7 @@ export default class AddCocktail extends React.Component {
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={
-                        () => this.submit(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass)
+                        () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass)
                     }>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>
@@ -122,5 +136,8 @@ const styles = StyleSheet.create({
         fontSize: 25,
         paddingTop: 5,
         textAlign: "center"
+    },
+    error: {
+        color: 'red'
     }
 });

@@ -46,6 +46,7 @@ export default class UpdateCocktail extends React.Component {
                 this.setState({ ingredients: res.data.ingredients });
                 this.setState({ glass: res.data.glass });
                 this.setState({ _id: res.data._id });
+                console.log(this.state._id);
                 this.handleName(res.data.name);
                 this.handleIngredients(res.data.ingredients);
             })
@@ -60,13 +61,11 @@ export default class UpdateCocktail extends React.Component {
         this.setState({ ingredients: text })
     }
 
-    isValid(name, spirit, description, ingredients, glass, id) {
-        if (name != '' && spirit != '' && description != '' && ingredients != '' && glass != '') {
-            this.submit(name, spirit, description, ingredients, glass, id)
-        } else {
-            alert("Fields cannot be blank")
-        }
-    }
+    // onChange = (e) => {
+    //     const state = this.state
+    //     state[e.target.name] = e.target.value;
+    //     this.setState({ cocktails: state });
+    // }
 
     submit = (name, spirit, description, ingredients, glass, id) => {
         console.log(name + ' ' + spirit + ' ' + description + ' ' + ingredients + ' ' + glass)
@@ -78,7 +77,7 @@ export default class UpdateCocktail extends React.Component {
             glass: glass,
             _id: id
         })
-        return this.props.navigation.navigate("ListCocktails")
+        this.props.navigation.goBack()
     }
     render() {
         return (
@@ -144,7 +143,7 @@ export default class UpdateCocktail extends React.Component {
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={
-                        () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
+                        () => this.submit(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
                     }>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>

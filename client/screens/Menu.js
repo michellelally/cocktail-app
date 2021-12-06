@@ -9,10 +9,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-import pic from '../assets/images/collins.png';
 
-class DisplayCocktails extends React.Component {
-    preferences = this.props.route.params.preferences;
+class Menu extends React.Component {
 
     state = {
         cocktails: []
@@ -23,16 +21,12 @@ class DisplayCocktails extends React.Component {
     }
 
     fectchCocktails() {
-        const url = "http://192.168.43.228:5000/api/suggestions";
+        const url = "http://192.168.43.228:5000/api/cocktails";
 
-        const data = {
-            spirit: this.preferences[0],
-            description: this.preferences[1]
-        }
-
-        axios.post(url, data)
+        axios.get(url)
             .then(res => {
                 this.setState({ cocktails: res.data });
+                // console.log(this.state.cocktails)
             })
             .catch(err => console.log(err.data))
     }
@@ -40,8 +34,6 @@ class DisplayCocktails extends React.Component {
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container}>
             <Text> {data.item.name}</Text>
-            <Text> {data.item.glass}</Text>
-            <Image style={styles.image} source={{ uri: data.item.glass }} />
         </TouchableOpacity>
 
 
@@ -51,7 +43,6 @@ class DisplayCocktails extends React.Component {
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
-                // keyExtractor={item => item.id.toString()}
                 />
             </SafeAreaView>)
     }
@@ -66,10 +57,9 @@ const styles = StyleSheet.create({
     },
 
     image: {
-        height: '10%',
-
+        height: '100%',
         borderRadius: 4,
     },
 });
 
-export default DisplayCocktails;
+export default Menu;

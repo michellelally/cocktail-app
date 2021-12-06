@@ -6,8 +6,7 @@ import {
   View,
   SafeAreaView,
   FlatList,
-  TouchableOpacity,
-  Button
+  TouchableOpacity
 } from 'react-native';
 
 import Swipeout from 'react-native-swipeout';
@@ -36,12 +35,7 @@ export default class SwipeoutDemo extends React.Component {
       .catch(err => console.log(err.data))
   }
 
-  navigateToAddCocktail(key) {
-    this.props.navigation.navigate("AddCocktail")
-  }
-
-  edit(cocktail) {
-    const key = cocktail.item._id
+  navigateToUpdate(key) {
     this.props.navigation.navigate("UpdateCocktail", {
       title: "UpdateCocktail",
       key: key
@@ -49,29 +43,27 @@ export default class SwipeoutDemo extends React.Component {
   }
 
   delete(cocktail) {
+    console.log("delete pressed")
+    console.log(cocktail.item._id)
     const data = {
       id: cocktail.item._id
     }
 
+    console.log(data)
     const url = `http://192.168.43.228:5000/api/delete/${data.id}`
 
+    console.log(url);
     axios.delete(url, data)
       .then(res => {
         console.log(res.data)
       })
       .catch(err => console.log(err.data));
 
-
     this.fectchCocktails();
   }
 
   swipeoutBtns(item) {
     return [
-      {
-        text: 'Edit',
-        onPress: () => this.edit(item),
-        type: 'secondary',
-      },
       {
         text: 'Delete',
         onPress: () => this.delete(item),
@@ -82,24 +74,20 @@ export default class SwipeoutDemo extends React.Component {
 
   renderItemComponent = (data) =>
     <Swipeout right={this.swipeoutBtns(data)} autoClose style={styles.container}>
-      <TouchableOpacity style={styles.container} onPress={() => alert(data.item.ingredients)}>
+      <TouchableOpacity style={styles.container} onPress={() => this.navigateToUpdate(data.item._id)}>
         <Text style={styles.itemText}> {data.item.name} </Text>
       </TouchableOpacity>
     </Swipeout>
 
   render() {
     return (
-      <View>
-        <Button
-          title="Add Cocktail"
-          onPress={() => this.navigateToAddCocktail()}
-        />
+      <SafeAreaView>
         <FlatList
           data={this.state.cocktails}
           renderItem={item => this.renderItemComponent(item)}
           style={{ paddingTop: 10, paddingLeft: 50, paddingRight: 50 }}
         />
-      </View>)
+      </SafeAreaView>)
   }
 }
 

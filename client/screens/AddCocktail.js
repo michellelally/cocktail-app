@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+
 import {
     Text,
     StyleSheet,
@@ -14,43 +14,15 @@ import { Picker } from '@react-native-picker/picker';
 
 import axios from 'axios';
 
-export default class UpdateCocktail extends React.Component {
-
-    key = this.props.route.params.key;
+export default class AddCocktail extends React.Component {
 
     state = {
         name: '',
         spirit: '',
         description: '',
         ingredients: '',
-        glass: '',
-        _id: ''
+        glass: ''
     };
-
-    componentDidMount() {
-        this.fectchCocktail();
-    }
-
-    fectchCocktail() {
-        const data = {
-            key: this.key
-        }
-
-        const url = "http://192.168.43.228:5000/api/cocktail";
-
-        axios.post(url, data)
-            .then(res => {
-                this.setState({ name: res.data.name })
-                this.setState({ spirit: res.data.spirit });
-                this.setState({ description: res.data.description });
-                this.setState({ ingredients: res.data.ingredients });
-                this.setState({ glass: res.data.glass });
-                this.setState({ _id: res.data._id });
-                this.handleName(res.data.name);
-                this.handleIngredients(res.data.ingredients);
-            })
-            .catch(err => console.log(err.data));
-    }
 
     handleName = (text) => {
         this.setState({ name: text })
@@ -60,35 +32,23 @@ export default class UpdateCocktail extends React.Component {
         this.setState({ ingredients: text })
     }
 
-    isValid(name, spirit, description, ingredients, glass, id) {
-        if (name != '' && spirit != '' && description != '' && ingredients != '' && glass != '') {
-            this.submit(name, spirit, description, ingredients, glass, id)
-        } else {
-            alert("Fields cannot be blank")
-        }
-    }
-
-    submit = (name, spirit, description, ingredients, glass, id) => {
+    submit = (name, spirit, description, ingredients, glass) => {
         console.log(name + ' ' + spirit + ' ' + description + ' ' + ingredients + ' ' + glass)
-        axios.put('http://192.168.43.228:5000/api/update', {
+        axios.post('http://192.168.43.228:5000/api/insert', {
             name: name,
             spirit: spirit,
             description: description,
             ingredients: ingredients,
-            glass: glass,
-            _id: id
+            glass: glass
         })
-        return this.props.navigation.navigate("ListCocktails")
     }
     render() {
         return (
             <View style={styles.container}>
-                <TextInput
-                    onChangeText={(text) => this.handleName(text)}
-                    placeholder={"Name"}
-                    autoFocus={true}
-                    style={[styles.inputBox]}
-                    value={this.state.name} />
+                <TextInput style={styles.inputBox}
+                    placeholder="Enter name"
+                    onChangeText={this.handleName}
+                />
 
                 <Picker
                     selectedValue={this.state.spirit}
@@ -118,13 +78,11 @@ export default class UpdateCocktail extends React.Component {
                     <Picker.Item label="Other" value="Other" />
                 </Picker>
 
-                <TextInput
-                    onChangeText={(text) => this.handleIngredients(text)}
-                    placeholder={"Name"}
-                    autoFocus={true}
-                    style={[styles.inputBox]}
-                    value={this.state.ingredients} />
-
+                <TextInput style={styles.input}
+                    placeholder="Enter Ingredients"
+                    style={styles.inputBox}
+                    onChangeText={this.handleIngredients}
+                />
 
                 <Picker
                     selectedValue={this.state.glass}
@@ -134,7 +92,7 @@ export default class UpdateCocktail extends React.Component {
                     }>
                     <Picker.Item label="Select a glass" />
                     <Picker.Item label="Coupe" value="Coupe" />
-                    <Picker.Item label="Tikki" value="assets/images/tikki.png" />
+                    <Picker.Item label="Tikki" value="Tikki" />
                     <Picker.Item label="Collins" value="Collins" />
                     <Picker.Item label="Rocks" value="Rocks" />
                     <Picker.Item label="Margarita" value="Margarita" />
@@ -144,7 +102,7 @@ export default class UpdateCocktail extends React.Component {
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={
-                        () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
+                        () => this.submit(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass)
                     }>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>

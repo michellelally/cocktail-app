@@ -23,7 +23,6 @@ const mongoURI = process.env.MONGODB_URI;
 
 var mongoDB = 'mongodb+srv://test:test@cluster0.1xu2w.mongodb.net/harrys?retryWrites=true&w=majority'
 
-
 //connecting to the database
 mongoose.connect(mongoDB);
 

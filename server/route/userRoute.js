@@ -1,6 +1,6 @@
 'use strict';
-var bodyParser = require('body-parser')
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+// var bodyParser = require('body-parser')
+// var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 module.exports = function(app) {
     var userHandlers = require('../controller/userController');

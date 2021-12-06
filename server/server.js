@@ -8,9 +8,15 @@ const books = require("../data/web_book_data.json");
 const model = require("../model");
 const controller = require('./controller/controller');
 const port = process.env.PORT || 5000; //Line 3
+const mongoURI = process.env.MONGODB_URI;
 const cors = require('cors');
+const option = {
+    socketTimeoutMS: 30000,
+    keepAlive: true,
+    reconnectTries: 30000
+};
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
@@ -28,6 +34,8 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
     console.log("ERROR: ", err)
 })
+
+var userModel = require('./model/userModel');
 
 var schema = new mongoose.Schema({
     name: {
@@ -54,24 +62,14 @@ var schema = new mongoose.Schema({
 
 var cocktailModel = mongoose.model('cocktails', schema)
 
-// app.get("/", (req, res) => {
-//     const cocktail = new cocktailModel({ name: "test", spirit: "test", description: "test", ingredients: "test", glass: "test" })
-//     try {
-//         cocktail.save();
-//         res.send("inserted data");
-//     } catch (err) {
-//         console.log(err);
-//     }
-// });
-
 app.post('/api/insert', function (req, res) {
-    console.log("inside insert");
+    console.log("/api/insert");
+    console.log("req.body", req.body)
     if (!req.body) {
         res.status(400).send({message: "Cannot be empty"});
         return;
     }
 
-    //new user
     const cocktail = new cocktailModel({
         name: req.body.name,
         spirit: req.body.spirit,
@@ -82,24 +80,15 @@ app.post('/api/insert', function (req, res) {
 
     try {
         cocktail.save();
-        res.send("inserted data");
+        res.send({ inserted: true});
     } catch (err) {
         console.log(err);
+        res.send(err)
     }
-
-    //save user in database 
-    // user.save(user).then(data => {
-    //     res.send(data)
-    //     console.log("");
-    // })
-    //     .catch(err => {
-    //         res.status(500).send({
-    //             message: err.message || 'Some error occurred while creating the cocktail'
-    //         });
-    //     });
 });
 
 app.get('/api/cocktails', function (req, res) {
+    console.log('/api/cocktails');
     cocktailModel.find(function (err, data) {
         if (err)
             res.send(err);
@@ -116,20 +105,9 @@ app.post('/api/cocktail', function (req, res) {
         });
 })
 
-
-app.post('/test', function (req, res) {
-    console.log(req.body)
-    // console.log("Read cocktail: ", id);
-    // cocktailModel.findById(id,
-    //     function (err, data) {
-    //         res.json(data);
-    //     });
-})
-
 app.put('/api/update', function (req, res) {
-    console.log("ID: ", req.body._id);
-    console.log("Body: ", req.body);
-
+    console.log('/api/update');
+    console.log('req.body._id req.body,' , req.body._id, req.body)
     cocktailModel.findByIdAndUpdate(req.body._id, req.body,
         function (err, data) {
             if (err) {
@@ -141,7 +119,7 @@ app.put('/api/update', function (req, res) {
 })
 
 app.delete('/api/delete/:id', function(req, res){
-    console.log("Delete")
+    console.log('/api/delete/:id');
     const id = req.params.id
     console.log("ID: ", id);
 
@@ -155,9 +133,8 @@ app.delete('/api/delete/:id', function(req, res){
 })
 
 app.post('/api/suggestions', function (req, res) {
+    console.log('/api/suggestions');
     var criteria = req.body;
-    console.log("body: ", criteria);
-    // var criteria = req.body;
     cocktailModel.find(criteria, function (err, data) {
         if (err)
             res.send(err);
@@ -165,9 +142,8 @@ app.post('/api/suggestions', function (req, res) {
     })
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
-
 app.get("/recommend", (req, res) => {
+    console.log('/recommend');
     let userId = 40;
     if (Number(userId) > 53424 || Number(userId) < 0) {
         res.send("User Id cannot be greater than 53,424 or less than 0!")
@@ -180,11 +156,25 @@ app.get("/recommend", (req, res) => {
 
 });
 
-// const spirit = "Vodka"
-// app.post('/api/cocktails', controller.create);
-// app.get('/api/cocktails', controller.find);
-// app.put('/api/cocktails/:id', controller.update);
-// app.delete('/api/cocktails/:id', controller.delete);
+app.listen(port, () => console.log(`Listening on port ${port}`)); 
 
+app.use(function (req, res, next) {
+    if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
+        jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function (err, decode) {
+            if (err) req.user = undefined;
+            req.user = decode;
+            next();
+        });
+    } else {
+        req.user = undefined;
+        next();
+    }
+});
+var routes = require('./route/userRoute');
+routes(app);
+
+app.use(function (req, res) {
+    return res.status(404).json({ url: req.originalUrl + ' not found' })
+});
 
 module.exports = app;

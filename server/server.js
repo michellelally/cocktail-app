@@ -117,6 +117,15 @@ app.post('/api/cocktail', function (req, res) {
 })
 
 
+app.post('/test', function (req, res) {
+    console.log(req.body)
+    // console.log("Read cocktail: ", id);
+    // cocktailModel.findById(id,
+    //     function (err, data) {
+    //         res.json(data);
+    //     });
+})
+
 app.put('/api/update', function (req, res) {
     console.log("ID: ", req.body._id);
     console.log("Body: ", req.body);
@@ -145,8 +154,6 @@ app.delete('/api/delete/:id', function(req, res){
 
 })
 
-
-
 app.post('/api/suggestions', function (req, res) {
     var criteria = req.body;
     console.log("body: ", criteria);
@@ -173,11 +180,11 @@ app.get("/recommend", (req, res) => {
 
 });
 
-const spirit = "Vodka"
-app.post('/api/cocktails', controller.create);
-app.get('/api/cocktails', controller.find);
-app.put('/api/cocktails/:id', controller.update);
-app.delete('/api/cocktails/:id', controller.delete);
+// const spirit = "Vodka"
+// app.post('/api/cocktails', controller.create);
+// app.get('/api/cocktails', controller.find);
+// app.put('/api/cocktails/:id', controller.update);
+// app.delete('/api/cocktails/:id', controller.delete);
 
 
 module.exports = app;

@@ -3,9 +3,6 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
-
-
-    User = require('./model/userModel'),
     bodyParser = require('body-parser'),
     jsonwebtoken = require("jsonwebtoken");
 
@@ -16,15 +13,30 @@ const option = {
     reconnectTries: 30000
 };
 
-const mongoURI = process.env.MONGODB_URI;
-mongoose.connect('mongodb+srv://test:test@cluster0.1xu2w.mongodb.net/harrys?retryWrites=true&w=majority'
-    , option).then(function () {
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
 
-        console.log("CONNECTED SUCCESSFULLY")
-        //connected successfully
-    }, function (err) {
-        //err handle
-    });
+// parse application/json
+app.use(bodyParser.json())
+
+const mongoURI = process.env.MONGODB_URI;
+
+var mongoDB = 'mongodb+srv://test:test@cluster0.1xu2w.mongodb.net/harrys?retryWrites=true&w=majority'
+
+
+//connecting to the database
+mongoose.connect(mongoDB);
+
+mongoose.connection.on('connected', () => {
+    console.log("CONNECTION SUCCESSFUL")
+})
+
+mongoose.connection.on('error', (err) => {
+    console.log("ERROR: ", err)
+})
+
+var User = require('./model/userModel');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -45,7 +57,7 @@ var routes = require('./route/userRoute');
 routes(app);
 
 app.use(function (req, res) {
-    res.status(404).send({ url: req.originalUrl + ' not found' })
+    return res.status(404).json({ url: req.originalUrl + ' not found' })
 });
 
 app.listen(port);

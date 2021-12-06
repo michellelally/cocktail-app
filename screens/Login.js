@@ -15,75 +15,63 @@ import axios from 'axios';
 
 export default class Login extends React.Component {
 
-
     state = {
-        username: '',
+        email: '',
         password: ''
     };
 
-    // componentDidMount() {
-    //     this.fectchCocktail();
-    // }
-
-    // fectchCocktail() {
-    //     const data = {
-    //         key: this.key
-    //     }
-
-    //     const url = "http://192.168.43.228:5000/api/cocktail";
-
-    //     axios.post(url, data)
-    //         .then(res => {
-    //             this.setState({ name: res.data.name })
-    //             this.setState({ spirit: res.data.spirit });
-    //             this.setState({ description: res.data.description });
-    //             this.setState({ ingredients: res.data.ingredients });
-    //             this.setState({ glass: res.data.glass });
-    //             this.setState({ _id: res.data._id });
-    //             console.log(this.state._id);
-    //             this.handleName(res.data.name);
-    //             this.handleIngredients(res.data.ingredients);
-    //         })
-    //         .catch(err => console.log(err.data));
-    // }
-
-    handlePassword = (text) => {
-        this.setState({ username: text })
+    handleEmail = (text) => {
+        this.setState({ email: text })
     }
 
     handlePassword = (text) => {
         this.setState({ password: text })
     }
 
-    submit = (username, password) => {
-        console.log(username + ' ' + password)
-        axios.put('http://192.168.43.228:5000/login', {
-            username: username,
+    // email: test@test.com
+    // password: test
+
+    submit = (email, password) => {
+
+        const data = {
+            email: email,
             password: password,
-        })
+        }
+        console.log(email + ' ' + password)
+        axios.post('http://192.168.43.228:3000/auth/sign_in', data)
+            .then(res => {
+                if (res.data.token) {
+                    return this.props.navigation.navigate("ListCocktails", {
+                        token: res.data.token
+                      });
+                }
+            })
+            .catch(() => {
+                alert("notloggedin")
+            })
         // this.props.navigation.goBack()
     }
     render() {
         return (
             <View style={styles.container}>
                 <TextInput
-                    onChangeText={(text) => this.handleName(text)}
-                    placeholder={"Name"}
+                    onChangeText={(text) => this.handleEmail(text)}
+                    placeholder={"Email"}
                     autoFocus={true}
                     style={[styles.inputBox]}
-                    value={this.state.name} />
+                    value={this.state.email} />
 
                 <TextInput
-                    onChangeText={(text) => this.handleIngredients(text)}
-                    placeholder={"Name"}
+                    onChangeText={(text) => this.handlePassword(text)}
+                    placeholder={"Password"}
                     autoFocus={true}
                     style={[styles.inputBox]}
-                    value={this.state.ingredients} />
+                    value={this.state.password} />
 
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={
-                        () => this.submit(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
+                        () => this.submit(this.state.email, this.state.password)
                     }>
                     <Text style={styles.submitButtonText}> Submit </Text>
                 </TouchableOpacity>

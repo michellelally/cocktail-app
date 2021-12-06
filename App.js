@@ -61,6 +61,7 @@ import AddCocktail from './screens/AddCocktail';
 import UpdateCocktail from './screens/UpdateCocktail'
 import Menu from './screens/Menu'
 import Footer from './components/Footer'
+import Login from './screens/Login'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -92,6 +93,7 @@ export default function Navigator() {
         <AppStack.Screen name="AddCocktail" component={AddCocktail} />
         <AppStack.Screen name="UpdateCocktail" component={UpdateCocktail} />
         <AppStack.Screen name="Menu" component={Menu} />
+        <AppStack.Screen name="Login" component={Login} />
         <AppStack.Screen name="Tabs" component={Tabs} />
       </AppStack.Navigator>
 

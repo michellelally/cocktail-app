@@ -51,6 +51,7 @@ export default class SwipeoutDemo extends React.Component {
       title: "UpdateCocktail",
       key: key
     })
+    this.handleRefresh();
   }
 
   delete(cocktail) {
@@ -68,6 +69,7 @@ export default class SwipeoutDemo extends React.Component {
 
 
     this.props.navigation.navigate('ListCocktails');
+    this.handleRefresh();
   }
 
   swipeoutBtns(item) {

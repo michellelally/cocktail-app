@@ -45,7 +45,7 @@ export default class App extends React.Component {
 
   renderItemComponent = (data) =>
     <TouchableOpacity style={styles.container}>
-        <Text> {data.item.title}</Text>
+        <Text> {data.item.name}</Text>
       <Image style={styles.image} source={{ uri: data.item.image_url }} />
     </TouchableOpacity>
 
@@ -67,7 +67,7 @@ export default class App extends React.Component {
         <FlatList
           data={this.state.data}
           renderItem={item => this.renderItemComponent(item)}
-          keyExtractor={item => item.book_id.toString()}
+          // keyExtractor={item => item.cocktail_id.toString()}
           ItemSeparatorComponent={this.ItemSeparator}
           refreshing={this.state.refreshing}
           onRefresh={this.handleRefresh}

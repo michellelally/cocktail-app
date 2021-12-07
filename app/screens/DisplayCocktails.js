@@ -4,18 +4,20 @@ import {
     SafeAreaView,
     FlatList,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Modal
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Icon } from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios';
 
-import pic from '../assets/images/collins.png';
-
 class DisplayCocktails extends React.Component {
+    
     preferences = this.props.route.params.preferences;
 
     state = {
-        cocktails: []
+        cocktails: [],
+        modalOpen: false,
+        recommendations: []
     };
 
     componentDidMount() {
@@ -37,8 +39,24 @@ class DisplayCocktails extends React.Component {
             .catch(err => console.log(err.data))
     }
 
+    getRecommendations(key) {
+        console.log("key: ", key)
+        const url = "http://192.168.43.228:5000/recommend";
+
+        const data = {
+            key: key
+        }
+
+        axios.post(url, data)
+            .then(res => {
+                this.setState({ recommendations: res.data });
+                console.log(this.state.recommendations)
+            })
+            .catch(err => console.log(err.data))
+        this.setState({ modalOpen: true })
+    }
     renderItemComponent = (data) =>
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => this.getRecommendations(data.item.key)}>
             <Text style={styles.text}> {data.item.name}</Text>
             <Text style={styles.text}> {data.item.ingredients}</Text>
             <Image style={styles.image} source={{ uri: data.item.glass }} />
@@ -48,12 +66,28 @@ class DisplayCocktails extends React.Component {
     render() {
         return (
             <SafeAreaView>
+
+                <Modal visible={this.state.modalOpen} animationType='slide'>
+                    <View style={styles.modalContent}>
+                        <Icon raised
+                            name="rectangle-xmark"
+                            size={30}
+                            color="#900"
+                            onPress={() => this.setState({ modalOpen: false })}
+                        />
+
+                        <FlatList
+                            data={this.state.recommendations}
+                            renderItem={item => this.renderItemComponent(item)}
+                        />
+                    </View>
+                </Modal>
+
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
-                // keyExtractor={item => item.id.toString()}
                 />
-            </SafeAreaView>)
+            </SafeAreaView >)
     }
 }
 
@@ -74,6 +108,23 @@ const styles = StyleSheet.create({
     text: {
         textAlign: "center",
         fontSize: 20
+    },
+    modalToggle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+        borderWidth: 1,
+        borderColor: '#f2f2f2',
+        padding: 10,
+        borderRadius: 10,
+        alignSelf: 'center',
+    },
+    modalClose: {
+        marginTop: 20,
+        marginBottom: 0,
+    },
+    modalContent: {
+        flex: 1,
     }
 });
 

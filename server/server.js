@@ -3,7 +3,7 @@ var path = require("path");
 var bodyParser = require("body-parser");
 var mongoose = require('mongoose');
 const app = express();
-const books = require("../app/data/web_book_data.json");
+const books = require("../app/data/web_cocktail_data.json");
 const model = require("../model");
 const port = process.env.PORT || 5000; //Line 3
 const mongoURI = process.env.MONGODB_URI;
@@ -140,11 +140,17 @@ app.post('/api/suggestions', function (req, res) {
     })
 })
 
-app.get("/recommend", (req, res) => {
+app.post("/recommend", (req, res) => {
     console.log('/recommend');
-    let userId = 40;
-    if (Number(userId) > 53424 || Number(userId) < 0) {
-        res.send("User Id cannot be greater than 53,424 or less than 0!")
+    console.log('req.body: ', req.body)
+    console.log('req.query: ', req.query)
+    console.log('req.params: ', req.params)
+
+    // let userId = req.body.key;
+
+    let userId = req.query.key;
+    if (Number(userId) > 40 || Number(userId) < 0) {
+        res.send("User Id cannot be greater than 40 or less than 0!")
     } else {
         let recs = model.recommend(userId)
             .then((recs) => {

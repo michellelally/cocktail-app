@@ -16,6 +16,8 @@ target 'harrys' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'harrysTests' do
     inherit! :complete
     # Pods for testing

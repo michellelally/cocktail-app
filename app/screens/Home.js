@@ -18,7 +18,7 @@ export default function Home() {
   const navigation = useNavigation();
 
   function navigateToMenu() {
-    navigation.navigate("ListCocktails");
+    navigation.navigate("Recommendations");
   }
 
   function navigateToPreferences() {

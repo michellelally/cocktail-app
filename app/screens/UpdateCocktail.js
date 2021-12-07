@@ -14,6 +14,8 @@ import { Picker } from '@react-native-picker/picker';
 
 import axios from 'axios';
 
+import { collins, coupe, hurricane, jug, margarita, rocks } from '../data/glasses'
+
 export default class UpdateCocktail extends React.Component {
 
     key = this.props.route.params.key;
@@ -26,12 +28,6 @@ export default class UpdateCocktail extends React.Component {
         glass: '',
         _id: ''
     };
-
-    coupe = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/coupe.png?token=AIQ5F5PI2QR2VL73GW7MXRTBV2CGU';
-    collins = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/collins.png?token=AIQ5F5LTHCDIRMI5OYHTGP3BV2CDW';
-    jug = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/jug.png?token=AIQ5F5NRMQCNSNP6R65QX3TBV2CGY';
-    hurricane = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/tikki.png?token=AIQ5F5KYIU47AKYRTEHIVQTBV2CHK';
-    rocks = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/rocks.png?token=AIQ5F5NRXSBLJ5ZRV2OTTF3BVZ74K';
 
     componentDidMount() {
         this.fectchCocktail();
@@ -139,12 +135,12 @@ export default class UpdateCocktail extends React.Component {
                         this.setState({ glass: itemValue })
                     }>
                     <Picker.Item label="Select a glass" />
-                    <Picker.Item label="Coupe" value={this.coupe} />
-                    <Picker.Item label="Hurricane" value={this.hurricane} />
-                    <Picker.Item label="Collins" value={this.collins} />
-                    <Picker.Item label="Rocks" value={this.rocks} />
-                    <Picker.Item label="Margarita" value="Margarita" />
-                    <Picker.Item label="Jug" value={this.jug} />
+                    <Picker.Item label="Coupe" value={coupe} />
+                    <Picker.Item label="Hurricane" value={hurricane} />
+                    <Picker.Item label="Collins" value={collins} />
+                    <Picker.Item label="Rocks" value={rocks} />
+                    <Picker.Item label="Margarita" value={margarita} />
+                    <Picker.Item label="Jug" value={jug} />
                 </Picker>
 
                 <TouchableOpacity

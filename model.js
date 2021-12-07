@@ -1,5 +1,5 @@
 const tf = require('@tensorflow/tfjs-node')
-const books = require("./data/web_book_data.json")
+const books = require("./app/data/web_book_data.json")
 
 async function loadModel() {
     console.log('Loading Model...')

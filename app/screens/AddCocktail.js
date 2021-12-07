@@ -14,14 +14,9 @@ import { Picker } from '@react-native-picker/picker';
 
 import axios from 'axios';
 
+import { collins, coupe, hurricane, jug, margarita, rocks } from '../data/glasses'
 
 export default class AddCocktail extends React.Component {
-
-    coupe = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/coupe.png?token=AIQ5F5PI2QR2VL73GW7MXRTBV2CGU';
-    collins = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/collins.png?token=AIQ5F5LTHCDIRMI5OYHTGP3BV2CDW';
-    jug = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/jug.png?token=AIQ5F5NRMQCNSNP6R65QX3TBV2CGY'
-    tikki = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/tikki.png?token=AIQ5F5KYIU47AKYRTEHIVQTBV2CHK'
-    rocks = 'https://raw.githubusercontent.com/michellelally/cocktail-app/main/assets/images/rocks.png?token=AIQ5F5NRXSBLJ5ZRV2OTTF3BVZ74K'
 
     state = {
         name: '',

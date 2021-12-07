@@ -3,11 +3,10 @@ const books = require("./app/data/web_book_data.json")
 
 async function loadModel() {
     console.log('Loading Model...')
-    global.value = await tf.loadLayersModel("file:///home/shelley/Apps/tensorflow/book-app/model/model.json", false);
+    global.value = await tf.loadLayersModel("file:///home/shelley/Apps/react-native/harrys/app/model/model.json", false);
     console.log('Model Loaded Successfull')
     // model.summary()
 }
-
 const book_arr = tf.range(0, books.length)
 const book_len = books.length
 

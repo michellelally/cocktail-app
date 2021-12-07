@@ -23,7 +23,7 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       data: [],
-      refreshing: true,
+      refreshing: true
     }
   }
 

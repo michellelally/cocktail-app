@@ -10,10 +10,6 @@ import styled from "styled-components/native";
 import Video from "react-native-video";
 import questions from "../data/questions";
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { RowItem } from "../components/RowItem";
-import { ScrollView, StatusBar } from "react-native";
-import Footer from '../components/Footer'
 
 const { width, height } = Dimensions.get("window");
 

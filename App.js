@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './app/screens/Home'
 import Preferences from './app/screens/Preferences'
-import Dashboard from './app/screens/dashboard'
+import Recommendations from './app/screens/Recommendations'
 import DisplayCocktails from './app/screens/DisplayCocktails';
 import ListCocktails from './app/screens/ListCocktails';
 import AddCocktail from './app/screens/AddCocktail';
@@ -35,7 +35,7 @@ export default function Navigator() {
     <NavigationContainer>
       <AppStack.Navigator screenOptions={{ headerShown: false }} >
         <AppStack.Screen name="Home" component={Home} />
-        <AppStack.Screen name="Dashboard" component={Dashboard} />
+        <AppStack.Screen name="Recommendations" component={Recommendations} />
         <AppStack.Screen name="ListCocktails" component={ListCocktails} />
         <AppStack.Screen name="Preferences" component={Preferences} />
         <AppStack.Screen name="DisplayCocktails" component={DisplayCocktails} />

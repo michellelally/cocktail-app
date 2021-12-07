@@ -18,7 +18,8 @@ import { useNavigation } from '@react-navigation/native';
 export default class SwipeoutDemo extends React.Component {
 
   state = {
-    cocktails: []
+    cocktails: [],
+    refreshing: true
   };
 
   componentDidMount() {
@@ -26,14 +27,18 @@ export default class SwipeoutDemo extends React.Component {
   }
 
   fectchCocktails() {
+    this.setState({ refreshing: true });
     const url = "http://192.168.43.228:5000/api/cocktails";
 
     axios.get(url)
       .then(res => {
         this.setState({ cocktails: res.data });
-        // console.log(this.state.cocktails)
+        this.setState({ refreshing: false });
       })
       .catch(err => console.log(err.data))
+  }
+  handleRefresh = () => {
+    this.setState({ refreshing: false }, () => { this.fectchCocktails() }); // call fetchCocktails after setting the state
   }
 
   navigateToAddCocktail(key) {
@@ -62,7 +67,7 @@ export default class SwipeoutDemo extends React.Component {
       .catch(err => console.log(err.data));
 
 
-      this.props.navigation.navigate('ListCocktails');
+    this.props.navigation.navigate('ListCocktails');
   }
 
   swipeoutBtns(item) {
@@ -98,6 +103,8 @@ export default class SwipeoutDemo extends React.Component {
           data={this.state.cocktails}
           renderItem={item => this.renderItemComponent(item)}
           style={{ paddingTop: 10, paddingLeft: 50, paddingRight: 50 }}
+          refreshing={this.state.refreshing}
+          onRefresh={this.handleRefresh}
         />
       </View>)
   }
@@ -105,7 +112,7 @@ export default class SwipeoutDemo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 50, 
+    height: 50,
     backgroundColor: '#FFF',
     borderRadius: 6,
     margin: 2,

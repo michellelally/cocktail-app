@@ -1,15 +1,20 @@
 import React from 'react';
 import {
-    Text, View, Button, StyleSheet,
+    Text, View, StyleSheet,
     SafeAreaView,
     FlatList,
     Image,
     TouchableOpacity,
-    Modal
+    Modal,
+    ImageBackground
 } from 'react-native';
+import { Button, ButtonContainer } from "../components/Button";
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import questions from "../data/questions";
 import axios from 'axios';
+import image from '../assets/harrys.png'
+
 
 class DisplayCocktails extends React.Component {
 
@@ -33,7 +38,6 @@ class DisplayCocktails extends React.Component {
     };
 
     componentDidMount() {
-
         this.fectchCocktails();
     }
 
@@ -78,15 +82,9 @@ class DisplayCocktails extends React.Component {
         this.setState({ modalOpen: true })
     }
 
-    navigateToPreferences() {
-        this.props.navigation.navigate("Preferences", {
-            title: "Preferences",
-            questions: questions
-        })
-    }
-
     renderItemComponent = (data) =>
-        <TouchableOpacity style={styles.container} onPress={() => this.getRecommendations(data.item.key)}>
+        <TouchableOpacity style={styles.
+            item} onPress={() => this.getRecommendations(data.item.key)}>
             <View style={styles.overlay}>
                 <Text style={styles.text}> {data.item.name}</Text>
                 <Text style={styles.text}> {data.item.ingredients}</Text>
@@ -95,63 +93,79 @@ class DisplayCocktails extends React.Component {
         </TouchableOpacity>
 
     renderRecsComponent = (data) =>
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.
+            item}>
             <Text style={styles.text}> {data.item.name}</Text>
             <Image style={styles.recImage} source={{ uri: data.item.image_url }} />
         </TouchableOpacity>
 
     render() {
         return (
-            <SafeAreaView>
-                <Modal visible={this.state.modalOpen} animationType='slide'>
-                    <View style={styles.modalContent}>
-                        <Icon name="close"
-                            raised
-                            backgroundColor="#3b5998"
-                            style={{ ...styles.modalToggle, ...styles.modalClose }}
-                            onPress={() => this.setState({ modalOpen: false })}
-                        />
-                        <Text style={styles.text}>Others also liked </Text>
-                        <FlatList
-                            data={this.state.recommendations}
-                            renderItem={item => this.renderRecsComponent(item)}
-                        />
+            <SafeAreaView style={styles.container}>
+                <ImageBackground
+                    source={image}
+                    resizeMode="contain"
+                    style={styles.backgroundImage}
+                    imageStyle={{ opacity: 0.15 }}
+                >
+                    <Modal visible={this.state.modalOpen} animationType='slide'>
+                        <View style={styles.modalContent}>
+                            <Icon name="close"
+                                raised
+                                style={{ ...styles.modalToggle, ...styles.modalClose }}
+                                onPress={() => this.setState({ modalOpen: false })}
+                            />
+                            <Text style={styles.text}>Others also liked </Text>
+                            <FlatList
+                                data={this.state.recommendations}
+                                renderItem={item => this.renderRecsComponent(item)}
+                            />
 
+                        </View>
+                    </Modal>
+                    <View>
+                        <ButtonContainer>
+                            <Button text="GO AGAIN!"
+                                onPress={() => this.props.navigation.goBack()}
+                            />
+                        </ButtonContainer>
                     </View>
-
-                </Modal>
-                <View>
-                    <TouchableOpacity styles={styles.button} onPress={this.navigateToPreferences}>
-                        <Button title="Go again"></Button>
-                    </TouchableOpacity>
-                </View>
-                <FlatList
-                    data={this.state.cocktails}
-                    renderItem={item => this.renderItemComponent(item)}
-                    contentContainerStyle={{ paddingBottom: 50, paddingLeft: 10, paddingRight: 10, paddingTop: 20 }}
-                />
-
+                    <FlatList
+                        data={this.state.cocktails}
+                        renderItem={item => this.renderItemComponent(item)}
+                        contentContainerStyle={{ paddingBottom: 50, paddingLeft: 10, paddingRight: 10, paddingTop: 20 }}
+                    />
+                </ImageBackground>
             </SafeAreaView >)
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'rgba(169, 169, 169)',
+        flex: 1,
+    },
+    item: {
         height: 300,
         margin: 10,
         borderRadius: 6,
+    },
+    backgroundImage: {
+        flex: 1,
+        justifyContent: "center"
     },
     image: {
         height: '90%',
         margin: 100,
         borderRadius: 4,
         marginTop: 0,
-        opacity: 0.3
+        opacity: 0.6
     },
     text: {
         textAlign: "center",
         fontSize: 20,
-        fontWeight: '500'
+        fontWeight: '500',
+        color: '#000000'
     },
     modalToggle: {
         justifyContent: 'center',
@@ -181,12 +195,12 @@ const styles = StyleSheet.create({
         height: "10%"
     },
     overlay: {
-        position: 'absolute', 
-        top: 0, 
-        left: 0, 
-        right: 0, 
-        bottom: 0, 
-        justifyContent: 'center', 
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        justifyContent: 'center',
         alignItems: 'center'
     }
 });

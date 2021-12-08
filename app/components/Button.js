@@ -3,23 +3,24 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "rgba(255, 255, 255, 0.3)",
+    backgroundColor: "rgba(105, 105, 105, 0.9)",
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",
     justifyContent: "center",
-    width: "46%",
+    width: "100%",
     marginTop: 20
-  },
+    },
   text: {
-    color: "#fff",
+    color: "#ffffff",
     fontSize: 20,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: 'Poppins-ExtraLight.ttf'
   },
   buttonContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 20,
+    marginTop: 0,
     justifyContent: "space-between"
   }
 });

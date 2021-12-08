@@ -35,7 +35,6 @@ class Preferences extends React.Component {
     totalCount: 2
   };
 
-
   answer = text => {
     this.setState(
       state => {
@@ -49,11 +48,12 @@ class Preferences extends React.Component {
     );
   };
 
-  nextQuestion = () => {
+  nextQuestion() {
     this.setState(state => {
       const nextIndex = state.activeQuestionIndex + 1;
 
       if (nextIndex >= state.totalCount) {
+        this.setState({ activeQuestionIndex: 0 })
         return this.props.navigation.navigate("DisplayCocktails", {
           preferences: this.arr
         });
@@ -64,7 +64,7 @@ class Preferences extends React.Component {
         answered: false
       };
     });
-  };
+  }
 
   render() {
 

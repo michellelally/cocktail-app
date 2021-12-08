@@ -132,7 +132,17 @@ app.delete('/api/delete/:id', function(req, res){
 
 app.post('/api/suggestions', function (req, res) {
     console.log('/api/suggestions');
-    var criteria = req.body;
+
+    var criteria;
+
+    if (req.body.description == 'All'){
+        criteria = "{ spirit: " + `'${req.body.spirit}' }`;
+        console.log("criteria: ", criteria)
+    } else {
+        criteria = req.body;
+    }
+    console.log(criteria)
+    console.log('req.body: ', req.body)
     cocktailModel.find(criteria, function (err, data) {
         if (err)
             res.send(err);
@@ -142,13 +152,8 @@ app.post('/api/suggestions', function (req, res) {
 
 app.post("/recommend", (req, res) => {
     console.log('/recommend');
-    console.log('req.body: ', req.body)
-    console.log('req.query: ', req.query)
-    console.log('req.params: ', req.params)
 
-    // let userId = req.body.key;
-
-    let userId = req.query.key;
+    let userId = req.body.key;
     if (Number(userId) > 40 || Number(userId) < 0) {
         res.send("User Id cannot be greater than 40 or less than 0!")
     } else {

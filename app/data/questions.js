@@ -17,7 +17,7 @@ const questions = [
             { id: "2", text: 'Boozy' },
             { id: "3", text: 'Sour' },
             { id: "4", text: 'Refreshing' },
-            { id: "5", text: 'Other' },
+            { id: "5", text: 'All' },
         ]
     }
 ];

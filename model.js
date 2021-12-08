@@ -19,7 +19,7 @@ exports.recommend = async function recommend(userId) {
     let pred = pred_tensor.arraySync()
 
     let recommendations = []
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 4; i++) {
         let max = pred_tensor.argMax().arraySync()
         recommendations.push(books[max]) //Push book with highest prediction probability
         pred.splice(max, 1)    //drop from array

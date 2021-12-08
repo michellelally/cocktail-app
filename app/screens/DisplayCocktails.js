@@ -13,6 +13,16 @@ import axios from 'axios';
 
 class DisplayCocktails extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.navigateToPreferences = () => {
+            this.props.navigation.navigate("Preferences", {
+                title: "Preferences",
+                questions: questions,
+            })
+        }
+    }
+
     preferences = this.props.route.params.preferences;
 
     state = {
@@ -23,11 +33,13 @@ class DisplayCocktails extends React.Component {
     };
 
     componentDidMount() {
-        this.setState({ data: '' })
+
         this.fectchCocktails();
     }
 
     fectchCocktails() {
+        this.setState({ data: '' })
+
         const url = "http://192.168.43.228:5000/api/suggestions";
 
         if (this.preferences[1] == 'All') {
@@ -69,15 +81,16 @@ class DisplayCocktails extends React.Component {
     navigateToPreferences() {
         this.props.navigation.navigate("Preferences", {
             title: "Preferences",
-            questions: questions,
-            color: "#36b1f0"
+            questions: questions
         })
     }
 
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container} onPress={() => this.getRecommendations(data.item.key)}>
-            <Text style={styles.text}> {data.item.name}</Text>
-            <Text style={styles.text}> {data.item.ingredients}</Text>
+            <View style={styles.overlay}>
+                <Text style={styles.text}> {data.item.name}</Text>
+                <Text style={styles.text}> {data.item.ingredients}</Text>
+            </View>
             <Image style={styles.image} source={{ uri: data.item.glass }} />
         </TouchableOpacity>
 
@@ -98,7 +111,7 @@ class DisplayCocktails extends React.Component {
                             style={{ ...styles.modalToggle, ...styles.modalClose }}
                             onPress={() => this.setState({ modalOpen: false })}
                         />
-                        <Text style={styles.text}>Others also liked...</Text>
+                        <Text style={styles.text}>Others also liked </Text>
                         <FlatList
                             data={this.state.recommendations}
                             renderItem={item => this.renderRecsComponent(item)}
@@ -109,12 +122,13 @@ class DisplayCocktails extends React.Component {
                 </Modal>
                 <View>
                     <TouchableOpacity styles={styles.button} onPress={this.navigateToPreferences}>
-                        <Text> GO AGAIN!</Text>
+                        <Button title="Go again"></Button>
                     </TouchableOpacity>
                 </View>
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
+                    contentContainerStyle={{ paddingBottom: 50, paddingLeft: 10, paddingRight: 10, paddingTop: 20 }}
                 />
 
             </SafeAreaView >)
@@ -125,26 +139,25 @@ const styles = StyleSheet.create({
     container: {
         height: 300,
         margin: 10,
-        backgroundColor: 'orange',
         borderRadius: 6,
-
     },
     image: {
-        height: '70%',
-        margin: 130,
+        height: '90%',
+        margin: 100,
         borderRadius: 4,
-        marginTop: 0
+        marginTop: 0,
+        opacity: 0.3
     },
     text: {
         textAlign: "center",
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: '500'
     },
     modalToggle: {
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
         borderWidth: 1,
-        borderColor: '#f2f2f2',
         padding: 10,
         borderRadius: 10,
         alignSelf: 'center',
@@ -164,8 +177,17 @@ const styles = StyleSheet.create({
     },
     button: {
         fontSize: 50,
-        color: 'f2f2f2',
+        color: '#f2f2f2',
         height: "10%"
+    },
+    overlay: {
+        position: 'absolute', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0, 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }
 });
 

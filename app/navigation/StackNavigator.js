@@ -2,7 +2,6 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from '../screens/Home'
 import Preferences from '../screens/Preferences'
-import Recommendations from '../screens/Recommendations'
 import DisplayCocktails from '../screens/DisplayCocktails';
 import ListCocktails from '../screens/ListCocktails';
 import AddCocktail from '../screens/AddCocktail';
@@ -15,8 +14,7 @@ const Stack = createStackNavigator();
 const screenOptionStyle = {
 
   headerStyle: {
-    backgroundColor: "#ff5400",
-    textAlign: "center"
+    backgroundColor: "#ff5400"
   },
   headerTintColor: "white",
   headerBackTitle: "Back",
@@ -34,7 +32,6 @@ const MainStackNavigator = () => {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Recommendations" component={Recommendations} />
       <Stack.Screen name="ListCocktails" component={ListCocktails} />
       <Stack.Screen name="Preferences" component={Preferences} />
       <Stack.Screen name="DisplayCocktails" component={DisplayCocktails} />

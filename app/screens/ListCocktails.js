@@ -4,7 +4,6 @@ import {
   Text,
   StyleSheet,
   View,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
   Button
@@ -12,8 +11,6 @@ import {
 
 import Swipeout from 'react-native-swipeout';
 import axios from 'axios';
-
-import { useNavigation } from '@react-navigation/native';
 
 export default class SwipeoutDemo extends React.Component {
 

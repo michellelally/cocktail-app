@@ -108,10 +108,10 @@ export default class AddCocktail extends React.Component {
                     }>
                     <Picker.Item label="Select a glass" />
                     <Picker.Item label="Coupe" value={coupe} />
-                    <Picker.Item label="Tikki" value={tikki} />
+                    <Picker.Item label="Tikki" value={hurricane} />
                     <Picker.Item label="Collins" value={collins} />
                     <Picker.Item label="Rocks" value={rocks} />
-                    <Picker.Item label="Margarita" value="Margarita" />
+                    <Picker.Item label="Margarita" value={margarita} />
                     <Picker.Item label="Jug" value={jug} />
                 </Picker>
 

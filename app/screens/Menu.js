@@ -34,6 +34,7 @@ class Menu extends React.Component {
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container}>
             <Text> {data.item.name}</Text>
+            <Text> {data.item.ingredients}</Text>
         </TouchableOpacity>
 
 
@@ -50,7 +51,7 @@ class Menu extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        height: 300,
+        height: 100,
         margin: 10,
         backgroundColor: '#FFF',
         borderRadius: 6,

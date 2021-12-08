@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         paddingTop: 5,
         textAlign: "center"
-    }, 
+    },
     textInput: {
         fontSize: 15,
         height: 50,

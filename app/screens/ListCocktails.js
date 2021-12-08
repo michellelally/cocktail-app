@@ -88,32 +88,37 @@ export default class SwipeoutDemo extends React.Component {
   }
 
   renderItemComponent = (data) =>
-    <Swipeout right={this.swipeoutBtns(data)} autoClose style={styles.container}>
-      <TouchableOpacity style={styles.container} onPress={() => alert(data.item.ingredients)}>
+    <Swipeout right={this.swipeoutBtns(data)} autoClose style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={() => alert(data.item.ingredients)}>
         <Text style={styles.itemText}> {data.item.name} </Text>
       </TouchableOpacity>
     </Swipeout>
 
   render() {
     return (
-      <View>
-        {/* <Button
-          title="Add Cocktail"
+      <View style={styles.main}>
+        <View style={styles.container}>
+          <Button
+          title="Add New Cocktail"
           onPress={() => this.navigateToAddCocktail()}
-        /> */}
-        <FlatList
-          data={this.state.cocktails}
-          renderItem={item => this.renderItemComponent(item)}
-          style={{ paddingTop: 10, paddingLeft: 50, paddingRight: 50 }}
-          refreshing={this.state.refreshing}
-          onRefresh={this.handleRefresh}
         />
+          <FlatList
+            data={this.state.cocktails}
+            renderItem={item => this.renderItemComponent(item)}
+            contentContainerStyle={{ paddingBottom: 80, paddingLeft: 20, paddingRight: 20, paddingTop: 20}}
+            refreshing={this.state.refreshing}
+            onRefresh={this.handleRefresh}
+          />
+        </View>
       </View>)
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+
+  },
+  item: {
     height: 50,
     backgroundColor: '#FFF',
     borderRadius: 6,

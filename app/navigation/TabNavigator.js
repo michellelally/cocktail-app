@@ -1,7 +1,7 @@
 import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MainStackNavigator, LoginStackNavigator } from "./StackNavigator";
+import { MainStackNavigator, LoginStackNavigator, MenuStackNavigator } from "./StackNavigator";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
@@ -22,6 +22,17 @@ const BottomTabNavigator = () => {
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color }) => (
                         <Icon name="home" color={color} size={26} />
+                    )
+                }}
+            />
+
+            <Tab.Screen
+                name="Menu"
+                component={MenuStackNavigator}
+                options={{
+                    tabBarLabel: 'Menu',
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="book" color={color} size={26} />
                     )
                 }}
             />

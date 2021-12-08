@@ -15,12 +15,12 @@ const Stack = createStackNavigator();
 const screenOptionStyle = {
 
   headerStyle: {
-    backgroundColor: "#9AC4F8",
+    backgroundColor: "#ff5400",
     textAlign: "center"
   },
   headerTintColor: "white",
   headerBackTitle: "Back",
-
+  headerTitleAlign: 'center'
 };
 
 
@@ -32,10 +32,8 @@ const MainStackNavigator = () => {
       screenOptions={{
         headerShown: false
       }}
-      
-    // screenOptions={{ headerStyle: { backgroundColor: "#9AC4F8", }, headerTintColor: "white", headerBackTitle: "Back", }}
     >
-      <Stack.Screen name="Home" component={Home}  />
+      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Recommendations" component={Recommendations} />
       <Stack.Screen name="ListCocktails" component={ListCocktails} />
       <Stack.Screen name="Preferences" component={Preferences} />
@@ -52,19 +50,22 @@ const MainStackNavigator = () => {
 };
 
 const LoginStackNavigator = () => {
-
   return (
-
     <Stack.Navigator screenOptions={screenOptionStyle}>
-
       <Stack.Screen name="Login" component={Login} />
-
     </Stack.Navigator>
-
   );
+};
 
+const MenuStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Menu" component={Menu} />
+    </Stack.Navigator>
+  );
 };
 
 
 
-export { MainStackNavigator, LoginStackNavigator };
+
+export { MainStackNavigator, LoginStackNavigator, MenuStackNavigator };

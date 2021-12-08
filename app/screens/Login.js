@@ -9,10 +9,7 @@ import {
     TextInput,
     Button
 } from 'react-native';
-
-
 import axios from 'axios';
-import { sub } from 'react-native-reanimated';
 
 export default class Login extends React.Component {
 
@@ -46,7 +43,6 @@ export default class Login extends React.Component {
             email: this.state.email,
             password: this.state.password,
         }
-        console.log(email + ' ' + password)
         axios.post('http://192.168.43.228:5000/auth/sign_in', data)
             .then(res => {
                 if (res.data.token) {
@@ -77,6 +73,7 @@ export default class Login extends React.Component {
                     placeholder={"Password"}
                     autoFocus={true}
                     style={[styles.inputBox]}
+                    secureTextEntry={true}
                     value={this.state.password} />
 
                 <TouchableOpacity

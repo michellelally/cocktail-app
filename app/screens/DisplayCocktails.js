@@ -8,7 +8,7 @@ import {
     Modal
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import questions from "../data/questions";
 import axios from 'axios';
 
 class DisplayCocktails extends React.Component {
@@ -18,25 +18,32 @@ class DisplayCocktails extends React.Component {
     state = {
         cocktails: [],
         modalOpen: false,
-        recommendations: []
+        recommendations: [],
+        data: []
     };
 
     componentDidMount() {
+        this.setState({ data: '' })
         this.fectchCocktails();
     }
 
     fectchCocktails() {
         const url = "http://192.168.43.228:5000/api/suggestions";
 
-        const data = {
-            spirit: this.preferences[0],
-            description: this.preferences[1]
+        if (this.preferences[1] == 'All') {
+            this.state.data = {
+                spirit: this.preferences[0]
+            }
+        } else {
+            this.state.data = {
+                spirit: this.preferences[0],
+                description: this.preferences[1]
+            }
         }
 
-        axios.post(url, data)
+        axios.post(url, this.state.data)
             .then(res => {
                 this.setState({ cocktails: res.data });
-                console.log(this.state.cocktails)
             })
             .catch(err => console.log(err.data))
     }
@@ -52,12 +59,21 @@ class DisplayCocktails extends React.Component {
         axios.post(url, data)
             .then(res => {
                 this.setState({ recommendations: res.data.recommendations });
-                console.log(this.state.recommendations)
+                // console.log(this.state.recommendations)
             })
             .catch(err => console.log(err.data))
 
         this.setState({ modalOpen: true })
     }
+
+    navigateToPreferences() {
+        this.props.navigation.navigate("Preferences", {
+            title: "Preferences",
+            questions: questions,
+            color: "#36b1f0"
+        })
+    }
+
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container} onPress={() => this.getRecommendations(data.item.key)}>
             <Text style={styles.text}> {data.item.name}</Text>
@@ -74,7 +90,6 @@ class DisplayCocktails extends React.Component {
     render() {
         return (
             <SafeAreaView>
-
                 <Modal visible={this.state.modalOpen} animationType='slide'>
                     <View style={styles.modalContent}>
                         <Icon name="close"
@@ -92,11 +107,16 @@ class DisplayCocktails extends React.Component {
                     </View>
 
                 </Modal>
-
+                <View>
+                    <TouchableOpacity styles={styles.button} onPress={this.navigateToPreferences}>
+                        <Text> GO AGAIN!</Text>
+                    </TouchableOpacity>
+                </View>
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
                 />
+
             </SafeAreaView >)
     }
 }
@@ -141,6 +161,11 @@ const styles = StyleSheet.create({
         margin: 100,
         borderRadius: 4,
         marginTop: 0
+    },
+    button: {
+        fontSize: 50,
+        color: 'f2f2f2',
+        height: "10%"
     }
 });
 

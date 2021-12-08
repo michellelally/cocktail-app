@@ -4,6 +4,7 @@ import { Button, ButtonContainer } from "../components/Button";
 import { Alert } from "../components/Alert";
 import { useRoute, useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import { NavigationEvents } from 'react-navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,7 +56,7 @@ class Preferences extends React.Component {
       if (nextIndex >= state.totalCount) {
         this.setState({ activeQuestionIndex: 0 })
         return this.props.navigation.navigate("DisplayCocktails", {
-          preferences: this.arr
+          preferences: this.arr,
         });
       }
 

@@ -103,7 +103,6 @@ export default class UpdateCocktail extends React.Component {
                     <Picker.Item label="Whiskey" value="Whiskey" />
                     <Picker.Item label="Rum" value="Rum" />
                     <Picker.Item label="Gin" value="Gin" />
-                    <Picker.Item label="Other" value="Other" />
                 </Picker>
 
                 <Picker

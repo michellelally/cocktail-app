@@ -133,16 +133,8 @@ app.delete('/api/delete/:id', function(req, res){
 app.post('/api/suggestions', function (req, res) {
     console.log('/api/suggestions');
 
-    var criteria;
-
-    if (req.body.description == 'All'){
-        criteria = "{ spirit: " + `'${req.body.spirit}' }`;
-        console.log("criteria: ", criteria)
-    } else {
-        criteria = req.body;
-    }
-    console.log(criteria)
-    console.log('req.body: ', req.body)
+    var criteria = req.body
+    console.log('criteria: ', criteria)
     cocktailModel.find(criteria, function (err, data) {
         if (err)
             res.send(err);

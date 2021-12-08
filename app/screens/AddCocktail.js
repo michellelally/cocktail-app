@@ -92,7 +92,6 @@ export default class AddCocktail extends React.Component {
                     <Picker.Item label="Refreshing" value="Refreshing" />
                     <Picker.Item label="Sour" value="Sour" />
                     <Picker.Item label="Boozy" value="Boozy" />
-                    <Picker.Item label="Other" value="Other" />
                 </Picker>
 
                 <TextInput style={styles.input}
@@ -108,12 +107,12 @@ export default class AddCocktail extends React.Component {
                         this.setState({ glass: itemValue })
                     }>
                     <Picker.Item label="Select a glass" />
-                    <Picker.Item label="Coupe" value={this.coupe} />
-                    <Picker.Item label="Tikki" value={this.tikki} />
-                    <Picker.Item label="Collins" value={this.collins} />
-                    <Picker.Item label="Rocks" value={this.rocks} />
+                    <Picker.Item label="Coupe" value={coupe} />
+                    <Picker.Item label="Tikki" value={tikki} />
+                    <Picker.Item label="Collins" value={collins} />
+                    <Picker.Item label="Rocks" value={rocks} />
                     <Picker.Item label="Margarita" value="Margarita" />
-                    <Picker.Item label="Jug" value={this.jug} />
+                    <Picker.Item label="Jug" value={jug} />
                 </Picker>
 
                 <TouchableOpacity

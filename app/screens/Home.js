@@ -18,7 +18,7 @@ export default function Home() {
   const navigation = useNavigation();
 
   function navigateToMenu() {
-    navigation.navigate("ListCocktails");
+    navigation.navigate("Menu");
   }
 
   function navigateToPreferences() {
@@ -31,14 +31,14 @@ export default function Home() {
   return (
     <View>
       <Video
-          // source={require("../assets/harrys.mp4")}
-          // style={styles.backgroundVideo}
-          // muted={true}
-          // repeat={true}
-          // resizeMode={"cover"}
-          // rate={1.0}
-          // ignoreSilentSwitch={"obey"}
-        />
+        source={require("../assets/harrys.mp4")}
+        style={styles.backgroundVideo}
+        muted={true}
+        repeat={true}
+        resizeMode={"cover"}
+        rate={1.0}
+        ignoreSilentSwitch={"obey"}
+      />
 
       <Wrapper>
         <Logo
@@ -63,10 +63,10 @@ export default function Home() {
         </ButtonWrapper>
       </Wrapper>
 
-    {/* <NavigationContainer>
+      {/* <NavigationContainer>
       <Footer></Footer>
     </NavigationContainer> */}
-    {/* <Footer/> */}
+      {/* <Footer/> */}
     </View>
   );
 }

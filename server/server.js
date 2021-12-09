@@ -64,7 +64,7 @@ app.post('/api/insert', function (req, res) {
     console.log("/api/insert");
     console.log("req.body", req.body)
     if (!req.body) {
-        res.status(400).send({message: "Cannot be empty"});
+        res.status(400).send({ message: "Cannot be empty" });
         return;
     }
 
@@ -78,7 +78,7 @@ app.post('/api/insert', function (req, res) {
 
     try {
         cocktail.save();
-        res.send({ inserted: true});
+        res.send({ inserted: true });
     } catch (err) {
         console.log(err);
         res.send(err)
@@ -105,7 +105,7 @@ app.post('/api/cocktail', function (req, res) {
 
 app.put('/api/update', function (req, res) {
     console.log('/api/update');
-    console.log('req.body._id req.body,' , req.body._id, req.body)
+    console.log('req.body._id req.body,', req.body._id, req.body)
     cocktailModel.findByIdAndUpdate(req.body._id, req.body,
         function (err, data) {
             if (err) {
@@ -116,7 +116,7 @@ app.put('/api/update', function (req, res) {
         });
 })
 
-app.delete('/api/delete/:id', function(req, res){
+app.delete('/api/delete/:id', function (req, res) {
     console.log('/api/delete/:id');
     const id = req.params.id
     console.log("ID: ", id);
@@ -138,9 +138,18 @@ app.post('/api/suggestions', function (req, res) {
     cocktailModel.find(criteria, function (err, data) {
         if (err)
             res.send(err);
+        // if(res.json(data)=== null || res.json(data) === undefined){
+        //     console.log("no data found");
+        //     res.json(data) = [{
+        //         "glass": "https://raw.githubusercontent.com/michellelally/cocktail-app/main/app/assets/images/garnish.png",
+        //         "ingredients": "Please try again.",
+        //         "name": "Cocktail not found",
+        //     }]
+        // } else {
         res.json(data);
     })
 })
+
 
 app.post("/recommend", (req, res) => {
     console.log('/recommend');
@@ -157,7 +166,7 @@ app.post("/recommend", (req, res) => {
 
 });
 
-app.listen(port, () => console.log(`Listening on port ${port}`)); 
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.use(function (req, res, next) {
     if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {

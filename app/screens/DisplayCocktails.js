@@ -46,6 +46,7 @@ class DisplayCocktails extends React.Component {
 
         const url = "http://192.168.43.228:5000/api/suggestions";
 
+
         if (this.preferences[1] == 'All') {
             this.state.data = {
                 spirit: this.preferences[0]
@@ -59,25 +60,17 @@ class DisplayCocktails extends React.Component {
 
         axios.post(url, this.state.data)
             .then(res => {
+                console.log(res.data)
                 this.setState({ cocktails: res.data });
-                console.log(this.state.cocktails)
+
             })
             .catch(err => console.log(err.data))
 
-        if (this.state.cocktails.length == 0) {
-            const notFound =
-                [{
-                    "_id": "61a78a537391f63d8a16bd44", 
-                    "description": "Sweet", 
-                    "glass": "https://raw.githubusercontent.com/michellelally/cocktail-app/main/app/assets/images/coupe.png", 
-                    "ingredients": "Vanilla Absolut Vodka, Violette Liqueur, Passion-fruit, Cranberry, Lime, Egg Whites", 
-                    "key": 12, 
-                    "name": "Starburst", 
-                    "spirit": "Vodka"
-                }]
-            this.setState({ cocktails: notFound })
-            console.log(this.state.cocktails)
-        }
+        // if (this.state.cocktails.length == 0) {
+
+        //     this.setState({ cocktails: notFound })
+        //     console.log(this.state.cocktails)
+        // }
     }
 
     getRecommendations(key) {
@@ -115,6 +108,16 @@ class DisplayCocktails extends React.Component {
             <Image style={styles.recImage} source={{ uri: data.item.image_url }} />
         </TouchableOpacity>
 
+    ItemSeparator = () => <View style={{
+        height: 2,
+        backgroundColor: "rgba(109, 169, 169, 0.2)",
+        // backgroundColor: "rgba(0,0,0,0.3)",
+
+        marginLeft: 10,
+        marginRight: 10,
+    }}
+    />
+
     render() {
         return (
             <SafeAreaView style={styles.container}>
@@ -122,22 +125,33 @@ class DisplayCocktails extends React.Component {
                     source={image}
                     resizeMode="contain"
                     style={styles.backgroundImage}
-                    imageStyle={{ opacity: 0.15 }}
+                    imageStyle={{ opacity: 0.05 }}
                 >
                     <Modal visible={this.state.modalOpen} animationType='slide'>
-                        <View style={styles.modalContent}>
-                            <Icon name="close"
-                                raised
-                                style={{ ...styles.modalToggle, ...styles.modalClose }}
-                                onPress={() => this.setState({ modalOpen: false })}
-                            />
-                            <Text style={styles.text}>Others also liked </Text>
-                            <FlatList
-                                data={this.state.recommendations}
-                                renderItem={item => this.renderRecsComponent(item)}
-                            />
+                        <ImageBackground
+                            source={image}
+                            resizeMode="contain"
+                            style={styles.backgroundImage}
+                            imageStyle={{ opacity: 0.05 }}
+                        >
+                            <View
+                                style={styles.modalView}
+                            >
+                                <Icon name="close"
+                                    raised
+                                    style={{ ...styles.modalToggle, ...styles.modalClose }}
+                                    onPress={() => this.setState({ modalOpen: false })}
+                                />
+                                <Text style={styles.text}>Others also liked </Text>
+                                <FlatList
+                                    data={this.state.recommendations}
+                                    ItemSeparatorComponent={this.ItemSeparator}
+                                    renderItem={item => this.renderRecsComponent(item)}
+                                    contentContainerStyle={{ paddingBottom: 20, paddingLeft: 10, paddingRight: 10, paddingTop: 20 }}
+                                />
 
-                        </View>
+                            </View>
+                        </ImageBackground>
                     </Modal>
                     <View>
                         <ButtonContainer>
@@ -149,7 +163,8 @@ class DisplayCocktails extends React.Component {
                     <FlatList
                         data={this.state.cocktails}
                         renderItem={item => this.renderItemComponent(item)}
-                        contentContainerStyle={{ paddingBottom: 50, paddingLeft: 10, paddingRight: 10, paddingTop: 20 }}
+                        ItemSeparatorComponent={this.ItemSeparator}
+                        contentContainerStyle={{ paddingBottom: 0, paddingLeft: 10, paddingRight: 10, paddingTop: 20 }}
                     />
                 </ImageBackground>
             </SafeAreaView >)
@@ -164,8 +179,8 @@ const styles = StyleSheet.create({
     item: {
         height: 300,
         margin: 10,
-        borderRadius: 6,
-        fontFamily: 'Poppins-ExtraLight.ttf'
+        paddingBottom: 50,
+        borderRadius: 6
     },
     backgroundImage: {
         flex: 1,
@@ -175,15 +190,28 @@ const styles = StyleSheet.create({
         height: '90%',
         margin: 100,
         borderRadius: 4,
-        marginTop: 0,
-        opacity: 0.6
+        marginTop: 0
+    },
+    modalView: {
+        marginTop: 30,
+        borderRadius: 20,
+        backgroundColor: 'rgb(252, 249, 247)',
+
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 4,
+        // elevation: 5
     },
     text: {
         textAlign: "center",
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: '500',
         color: '#000000',
-        fontFamily: 'Poppins-ExtraLight.ttf '
+        fontFamily: 'sans-serif-light'
     },
     modalToggle: {
         justifyContent: 'center',
@@ -198,11 +226,8 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 0,
     },
-    modalContent: {
-        flex: 1,
-    },
     recImage: {
-        height: '80%',
+        height: '100%',
         margin: 100,
         borderRadius: 4,
         marginTop: 0
@@ -212,15 +237,15 @@ const styles = StyleSheet.create({
         color: '#f2f2f2',
         height: "10%"
     },
-    overlay: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+    // overlay: {
+    //     position: 'absolute',
+    //     top: 0,
+    //     left: 0,
+    //     right: 0,
+    //     bottom: 0,
+    //     justifyContent: 'center',
+    //     alignItems: 'center'
+    // }
 });
 
 export default DisplayCocktails;

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "rgba(105, 105, 105, 0.9)",
+    backgroundColor: "rgba(225, 84, 0, 0.9)",
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",
@@ -11,12 +11,13 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 20,
 
-    },
+  },
   text: {
     color: "#ffffff",
-    fontSize: 20,
+    fontSize: 15,
     textAlign: "center",
-    fontFamily: 'Poppins-ExtraLight.ttf'
+    fontFamily: 'sans-serif-light',
+    textTransform: 'uppercase'
   },
   buttonContainer: {
     flexDirection: "row",
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export const Button = ({ text, onPress = () => {} }) => (
+export const Button = ({ text, onPress = () => { } }) => (
   <TouchableOpacity onPress={onPress} style={styles.button}>
     <Text style={styles.text}>{text}</Text>
   </TouchableOpacity>

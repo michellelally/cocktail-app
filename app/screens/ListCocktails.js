@@ -44,8 +44,8 @@ export default class SwipeoutDemo extends React.Component {
 
   edit(cocktail) {
     const key = cocktail.item._id
-    this.props.navigation.navigate("UpdateCocktail", {
-      title: "UpdateCocktail",
+    this.props.navigation.navigate("Update Cocktail", {
+      title: "Update Cocktail",
       key: key
     })
     this.handleRefresh();

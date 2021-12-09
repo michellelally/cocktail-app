@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 const screenOptionStyle = {
 
   headerStyle: {
-    backgroundColor: "#ff5400"
+    backgroundColor: "rgba(225, 84, 0, 0.9)"
   },
   headerTintColor: "white",
   headerBackTitle: "Back",
@@ -26,17 +26,13 @@ const MainStackNavigator = () => {
 
   return (
 
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false
-      }}
-    >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="ListCocktails" component={ListCocktails} />
+    <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="Home" options={{ headerShown: false }} component={Home} />
+      <Stack.Screen name="List Cocktails" component={ListCocktails} />
       <Stack.Screen name="Preferences" component={Preferences} />
-      <Stack.Screen name="DisplayCocktails" component={DisplayCocktails} />
+      <Stack.Screen name="DisplayCocktails" options={{ headerShown: false }} component={DisplayCocktails} />
       <Stack.Screen name="AddCocktail" component={AddCocktail} />
-      <Stack.Screen name="UpdateCocktail" component={UpdateCocktail} />
+      <Stack.Screen name="Update Cocktail" component={UpdateCocktail} />
       <Stack.Screen name="Menu" component={Menu} />
       <Stack.Screen name="Login" component={Login} />
 

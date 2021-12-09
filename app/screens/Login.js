@@ -3,13 +3,15 @@ import { useNavigation } from '@react-navigation/native';
 import {
     Text,
     StyleSheet,
-    View,
     SafeAreaView,
-    TouchableOpacity,
-    TextInput,
-    Button
+    ImageBackground,
+    View,
+    TextInput
 } from 'react-native';
+import { Button } from "../components/Button";
 import axios from 'axios';
+import image from '../assets/harrys.png'
+
 
 export default class Login extends React.Component {
 
@@ -46,7 +48,7 @@ export default class Login extends React.Component {
         axios.post('http://192.168.43.228:5000/auth/sign_in', data)
             .then(res => {
                 if (res.data.token) {
-                    return this.props.navigation.navigate("ListCocktails", {
+                    return this.props.navigation.navigate("List Cocktails", {
                         token: res.data.token
                     });
                 }
@@ -54,36 +56,44 @@ export default class Login extends React.Component {
             .catch(() => {
                 alert("Incorrect email or password. Please try again ")
             })
-        // this.props.navigation.goBack()
-
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <TextInput
-                    onChangeText={(text) => this.handleEmail(text)}
-                    placeholder={"Email"}
-                    autoFocus={true}
-                    style={[styles.inputBox]}
-                    value={this.state.email} />
+            <SafeAreaView style={styles.container}>
+                <ImageBackground
+                    source={image}
+                    resizeMode="contain"
+                    style={styles.backgroundImage}
+                    imageStyle={{ opacity: 0.1 }}
+                >
+                    <TextInput
+                        onChangeText={(text) => this.handleEmail(text)}
+                        placeholder={"Email"}
+                        autoFocus={true}
+                        style={styles.inputBox}
+                        value={this.state.email}
+                    />
 
-                <TextInput
-                    onChangeText={(text) => this.handlePassword(text)}
-                    placeholder={"Password"}
-                    autoFocus={true}
-                    style={[styles.inputBox]}
-                    secureTextEntry={true}
-                    value={this.state.password} />
+                    <TextInput
+                        onChangeText={(text) => this.handlePassword(text)}
+                        placeholder={"Password"}
+                        autoFocus={true}
+                        style={styles.inputBox}
+                        secureTextEntry={true}
+                        value={this.state.password}
+                    />
 
-                <TouchableOpacity
-                    style={styles.submitButton}
-                    onPress={
-                        () => this.isValid(this.state.email, this.state.password)
-                    }>
-                    <Text style={styles.submitButtonText}> Submit </Text>
-                </TouchableOpacity>
-            </View>
+                    <View style={{ marginLeft: 10,  marginRight: 10}}>
+                        <Button
+                            text="Submit"
+                            onPress={
+                                () => this.isValid(this.state.email, this.state.password)
+                            }
+                        />
+                    </View>
+                </ImageBackground>
+            </SafeAreaView>
         )
     }
 }
@@ -91,7 +101,7 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
     inputBox: {
         height: 50,
-        margin: 3,
+        margin: 5,
         backgroundColor: '#FFF',
         borderRadius: 6,
     },
@@ -102,5 +112,15 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red'
+    },
+    container: {
+        backgroundColor: 'rgba(169, 169, 169)',
+        flex: 1,
+        justifyContent: "flex-start",
+        margin: 20
+    },
+    backgroundImage: {
+        flex: 1,
+        justifyContent: "flex-start"
     }
 });

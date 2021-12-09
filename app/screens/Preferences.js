@@ -53,13 +53,12 @@ class Preferences extends React.Component {
     return (
 
       <View style={styles.container}>
-        <ImageBackground
+        {/* <ImageBackground
           source={image}
           resizeMode="contain"
           style={styles.image}
           imageStyle={{ opacity: 0.5 }}
-
-        >
+        > */}
           <StatusBar barStyle="light-content" />
           <SafeAreaView style={styles.safearea}>
             <View>
@@ -76,7 +75,7 @@ class Preferences extends React.Component {
               </ButtonContainer>
             </View>
           </SafeAreaView>
-        </ImageBackground>
+        {/* </ImageBackground> */}
       </View>
     );
   }
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
   },
   safearea: {
     flex: 1,
-    marginTop: 100,
+    marginTop: 75,
     justifyContent: "space-between"
   }
 });

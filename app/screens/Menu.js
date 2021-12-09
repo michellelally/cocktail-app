@@ -3,12 +3,11 @@ import {
     Text, View, Button, StyleSheet,
     SafeAreaView,
     FlatList,
-    Image,
+    ImageBackground,
     TouchableOpacity
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-
+import image from '../assets/harrys.png'
 
 class Menu extends React.Component {
 
@@ -33,9 +32,9 @@ class Menu extends React.Component {
 
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container}>
-            <View style={{ textAlign: "center"}}>
-                <Text style={{ textAlign: "center"}}> {data.item.name}</Text>
-                <Text style={{ textAlign: "center"}}> {data.item.ingredients}</Text>
+            <View style={{ textAlign: "center" }}>
+                <Text style={styles.text}> {data.item.name}</Text>
+                <Text style={styles.text}> {data.item.ingredients}</Text>
             </View>
 
         </TouchableOpacity>
@@ -43,12 +42,18 @@ class Menu extends React.Component {
 
     render() {
         return (
-            <SafeAreaView>
+            <ImageBackground
+            source={image}
+            resizeMode="contain"
+            style={styles.backgroundImage}
+            imageStyle={{ opacity: 0.1 }}
+        >
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
                 />
-            </SafeAreaView>)
+            </ImageBackground>
+        )
     }
 }
 
@@ -58,7 +63,13 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 6,
     },
-
+    text: {
+        textAlign: "center",
+        fontSize: 17,
+        fontWeight: '500',
+        color: '#000000',
+        fontFamily: 'sans-serif-light'
+    },
     image: {
         height: '100%',
         borderRadius: 4

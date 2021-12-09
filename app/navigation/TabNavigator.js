@@ -1,15 +1,12 @@
 import React from "react";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MainStackNavigator, LoginStackNavigator, MenuStackNavigator } from "./StackNavigator";
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
 
     return (
-
         <Tab.Navigator
             screenOptions={{
                 headerShown: false
@@ -47,11 +44,8 @@ const BottomTabNavigator = () => {
                     )
                 }}
             />
-
         </Tab.Navigator>
-
     );
-
 };
 
 export default BottomTabNavigator;

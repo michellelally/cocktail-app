@@ -103,6 +103,7 @@ export default class UpdateCocktail extends React.Component {
                     <Picker.Item label="Whiskey" value="Whiskey" />
                     <Picker.Item label="Rum" value="Rum" />
                     <Picker.Item label="Gin" value="Gin" />
+                    <Picker.Item label="Other" value="Other" />
                 </Picker>
 
                 <Picker
@@ -116,7 +117,6 @@ export default class UpdateCocktail extends React.Component {
                     <Picker.Item label="Refreshing" value="Refreshing" />
                     <Picker.Item label="Sour" value="Sour" />
                     <Picker.Item label="Boozy" value="Boozy" />
-                    <Picker.Item label="Other" value="Other" />
                 </Picker>
 
                 <TextInput

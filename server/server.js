@@ -146,8 +146,8 @@ app.post("/recommend", (req, res) => {
     console.log('/recommend');
 
     let userId = req.body.key;
-    if (Number(userId) > 40 || Number(userId) < 0) {
-        res.send("User Id cannot be greater than 40 or less than 0!")
+    if (userId > 40) {
+        this.userId = 41
     } else {
         let recs = model.recommend(userId)
             .then((recs) => {

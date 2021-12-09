@@ -60,8 +60,24 @@ class DisplayCocktails extends React.Component {
         axios.post(url, this.state.data)
             .then(res => {
                 this.setState({ cocktails: res.data });
+                console.log(this.state.cocktails)
             })
             .catch(err => console.log(err.data))
+
+        if (this.state.cocktails.length == 0) {
+            const notFound =
+                [{
+                    "_id": "61a78a537391f63d8a16bd44", 
+                    "description": "Sweet", 
+                    "glass": "https://raw.githubusercontent.com/michellelally/cocktail-app/main/app/assets/images/coupe.png", 
+                    "ingredients": "Vanilla Absolut Vodka, Violette Liqueur, Passion-fruit, Cranberry, Lime, Egg Whites", 
+                    "key": 12, 
+                    "name": "Starburst", 
+                    "spirit": "Vodka"
+                }]
+            this.setState({ cocktails: notFound })
+            console.log(this.state.cocktails)
+        }
     }
 
     getRecommendations(key) {
@@ -125,7 +141,7 @@ class DisplayCocktails extends React.Component {
                     </Modal>
                     <View>
                         <ButtonContainer>
-                            <Button text="GO AGAIN!"
+                            <Button text="GO AGAIN"
                                 onPress={() => this.props.navigation.goBack()}
                             />
                         </ButtonContainer>
@@ -149,6 +165,7 @@ const styles = StyleSheet.create({
         height: 300,
         margin: 10,
         borderRadius: 6,
+        fontFamily: 'Poppins-ExtraLight.ttf'
     },
     backgroundImage: {
         flex: 1,
@@ -165,7 +182,8 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontSize: 20,
         fontWeight: '500',
-        color: '#000000'
+        color: '#000000',
+        fontFamily: 'Poppins-ExtraLight.ttf '
     },
     modalToggle: {
         justifyContent: 'center',

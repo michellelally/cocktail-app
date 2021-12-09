@@ -141,14 +141,15 @@ export default class UpdateCocktail extends React.Component {
                     </Picker>
                 </View>
 
-                <View style={{ marginLeft: 10, marginRight: 10 }}>
+                <ButtonContainer>
                     <Button
+                        styles={styles.text}
                         text="Submit"
                         onPress={
-                            () => this.isValid(this.state.email, this.state.password)
+                            () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
                         }
-                    />
-                </View>
+                />
+                </ButtonContainer>
 
                 {/* <TouchableOpacity
                         style={styles.submitButton}

@@ -5,6 +5,8 @@ import BottomTabNavigator from "./app/navigation/TabNavigator";
 const App = () => {
   return (
     <NavigationContainer>
+          {/* <Text testID="title">Hello there</Text> */}
+
         <BottomTabNavigator />
     </NavigationContainer>
   );

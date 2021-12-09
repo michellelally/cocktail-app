@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <View>
-      <Video
+      {/* <Video
         source={require("../assets/harrys.mp4")}
         style={styles.backgroundVideo}
         muted={true}
@@ -38,7 +38,7 @@ export default function Home() {
         resizeMode={"cover"}
         rate={1.0}
         ignoreSilentSwitch={"obey"}
-      />
+      /> */}
 
       <Wrapper>
         <Logo

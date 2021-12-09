@@ -137,11 +137,18 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
+        testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         applicationId "com.harrys"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+      testBuildType System.getProperty('testBuildType', 'debug')  // This will later be used to control the test apk build type
+      testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+      missingDimensionStrategy 'detox', 'full'
+
     }
     splits {
         abi {
@@ -201,8 +208,9 @@ dependencies {
 implementation project(':react-native-screens')
 implementation project(':react-native-gesture-handler')
 implementation project(':react-native-safe-area-context')
+    androidTestImplementation(project(path: ":detox"))
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-
+    androidTestImplementation('com.wix:detox:+')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

@@ -4,16 +4,13 @@ import {
     Text,
     StyleSheet,
     View,
-    SafeAreaView,
     TouchableOpacity,
-    TextInput,
-    Button
+    TextInput
 } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
-
+import { Button } from "../components/Button";
 import axios from 'axios';
-
 import { collins, coupe, hurricane, jug, margarita, rocks } from '../data/glasses'
 
 export default class AddCocktail extends React.Component {
@@ -55,7 +52,7 @@ export default class AddCocktail extends React.Component {
             .then(res => {
                 console.log("res: ", res.data.inserted)
             })
-        this.props.navigation.navigate("ListCocktails");
+        this.props.navigation.navigate("List Cocktails");
     }
 
     render() {
@@ -115,13 +112,15 @@ export default class AddCocktail extends React.Component {
                     <Picker.Item label="Jug" value={jug} />
                 </Picker>
 
-                <TouchableOpacity
-                    style={styles.submitButton}
-                    onPress={
-                        () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass)
-                    }>
-                    <Text style={styles.submitButtonText}> Submit </Text>
-                </TouchableOpacity>
+                <View style={{ marginLeft: 50, marginRight: 50 }}>
+                    <Button
+                        text="Submit"
+                        onPress={
+                            () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
+                        }
+                    />
+                </View>
+
             </View>
         )
     }
@@ -133,6 +132,8 @@ const styles = StyleSheet.create({
         margin: 3,
         backgroundColor: '#FFF',
         borderRadius: 6,
+        fontFamily: "sans-serif-light",
+        fontSize: 17
     },
     itemText: {
         fontSize: 25,

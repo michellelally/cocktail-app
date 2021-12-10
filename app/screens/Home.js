@@ -1,25 +1,20 @@
-import React, { Component, TouchableOpacity, Fragment } from "react";
+import React, { Fragment } from "react";
 import {
   Text,
   View,
   StyleSheet,
   Dimensions,
-  TouchableHighlight
 } from "react-native";
 import styled from "styled-components/native";
 import Video from "react-native-video";
 import questions from "../data/questions";
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 export default function Home() {
 
   const navigation = useNavigation();
-
-  function navigateToMenu() {
-    navigation.navigate("Menu");
-  }
 
   function navigateToPreferences() {
     navigation.navigate("Preferences", {
@@ -53,11 +48,8 @@ export default function Home() {
           </TextDescription>
         <ButtonWrapper>
           <Fragment>
-            <Button title="Begin"
+            <Button transparent title="Begin"
               onPress={() => navigateToPreferences()}
-            />
-            <Button transparent title="Menu"
-              onPress={() => navigateToMenu()}
             />
           </Fragment>
         </ButtonWrapper>

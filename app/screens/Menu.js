@@ -12,7 +12,8 @@ import image from '../assets/harrys.png'
 class Menu extends React.Component {
 
     state = {
-        cocktails: []
+        cocktails: [],
+        refreshing: true
     };
 
     componentDidMount() {
@@ -20,14 +21,19 @@ class Menu extends React.Component {
     }
 
     fectchCocktails() {
+        this.setState({ refreshing: true });
         const url = "http://192.168.43.228:5000/api/cocktails";
 
         axios.get(url)
             .then(res => {
                 this.setState({ cocktails: res.data });
-                // console.log(this.state.cocktails)
+                this.setState({ refreshing: false });
             })
             .catch(err => console.log(err.data))
+    }
+
+    handleRefresh = () => {
+        this.setState({ refreshing: false }, () => { this.fectchCocktails() }); // call fetchCocktails after setting the state
     }
 
     renderItemComponent = (data) =>
@@ -43,14 +49,16 @@ class Menu extends React.Component {
     render() {
         return (
             <ImageBackground
-            source={image}
-            resizeMode="contain"
-            style={styles.backgroundImage}
-            imageStyle={{ opacity: 0.1 }}
-        >
+                source={image}
+                resizeMode="contain"
+                style={styles.backgroundImage}
+                imageStyle={{ opacity: 0.1 }}
+            >
                 <FlatList
                     data={this.state.cocktails}
                     renderItem={item => this.renderItemComponent(item)}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this.handleRefresh}
                 />
             </ImageBackground>
         )
@@ -66,24 +74,12 @@ const styles = StyleSheet.create({
     text: {
         textAlign: "center",
         fontSize: 17,
-        fontWeight: '500',
         color: '#000000',
         fontFamily: 'sans-serif-light'
     },
     image: {
         height: '100%',
         borderRadius: 4
-    },
-    centerText: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: "centers"
-
     }
 });
 

@@ -110,9 +110,7 @@ class DisplayCocktails extends React.Component {
 
     ItemSeparator = () => <View style={{
         height: 2,
-        backgroundColor: "rgba(109, 169, 169, 0.2)",
-        // backgroundColor: "rgba(0,0,0,0.3)",
-
+        backgroundColor: "rgba(225, 84, 0, .5)",
         marginLeft: 10,
         marginRight: 10,
     }}

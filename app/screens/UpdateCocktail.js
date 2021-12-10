@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import {
     Text,
     StyleSheet,
@@ -7,8 +6,7 @@ import {
     TouchableOpacity,
     TextInput
 } from 'react-native';
-import Button from '../components/Button'
-
+import { Button } from "../components/Button";
 import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
 import { collins, coupe, hurricane, jug, margarita, rocks } from '../data/glasses'
@@ -77,7 +75,7 @@ export default class UpdateCocktail extends React.Component {
             glass: glass,
             _id: id
         })
-        this.props.navigation.navigate("ListCocktails")
+        this.props.navigation.navigate("List Cocktails")
     }
     render() {
         return (
@@ -141,22 +139,15 @@ export default class UpdateCocktail extends React.Component {
                     </Picker>
                 </View>
 
-                <View style={{ marginLeft: 10, marginRight: 10 }}>
+                <View style={{ marginLeft: 50, marginRight: 50 }}>
                     <Button
                         text="Submit"
                         onPress={
-                            () => this.isValid(this.state.email, this.state.password)
+                            () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
                         }
                     />
                 </View>
 
-                {/* <TouchableOpacity
-                        style={styles.submitButton}
-                        onPress={
-                            () => this.isValid(this.state.name, this.state.spirit, this.state.description, this.state.ingredients, this.state.glass, this.state._id)
-                        }>
-                        <Text style={styles.submitButtonText}> Submit </Text>
-                    </TouchableOpacity> */}
             </View>
         )
     }
@@ -166,16 +157,16 @@ const styles = StyleSheet.create({
     container: {
         margin: 10,
         flex: 1,
-        justifyContent: "center"
+        justifyContent: "flex-start"
     },
 
     textInput: {
-        fontSize: 15,
         height: 50,
         margin: 5,
-        // paddingLeft: 20,
         backgroundColor: '#FFF',
         borderRadius: 6,
+        fontSize: 15
+
     },
     inputBox: {
         height: 50,

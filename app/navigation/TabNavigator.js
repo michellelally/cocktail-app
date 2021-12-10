@@ -11,7 +11,13 @@ const BottomTabNavigator = () => {
             screenOptions={{
                 headerShown: false
             }}
-        >
+            style={{ backgroundColor: 'rgba(169, 169, 0)'}}
+            tabBarOptions={{
+                activeTintColor: 'rgb(225, 84, 0)',
+                inactiveTintColor: 'black'
+              }}
+              >
+        
             <Tab.Screen
                 name="Home"
                 component={MainStackNavigator}

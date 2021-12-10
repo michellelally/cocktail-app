@@ -104,14 +104,8 @@ const styles = StyleSheet.create({
         margin: 5,
         backgroundColor: '#FFF',
         borderRadius: 6,
-    },
-    itemText: {
-        fontSize: 25,
-        paddingTop: 5,
-        textAlign: "center"
-    },
-    error: {
-        color: 'red'
+        fontFamily: "sans-serif-light",
+        fontSize: 17
     },
     container: {
         backgroundColor: 'rgba(169, 169, 169)',

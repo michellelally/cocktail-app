@@ -5,10 +5,9 @@ import {
   StyleSheet,
   View,
   FlatList,
-  TouchableOpacity,
-  Button
+  TouchableOpacity
 } from 'react-native';
-
+import { Button } from "../components/Button";
 import Swipeout from 'react-native-swipeout';
 import axios from 'axios';
 
@@ -65,7 +64,7 @@ export default class SwipeoutDemo extends React.Component {
       .catch(err => console.log(err.data));
 
 
-    this.props.navigation.navigate('ListCocktails');
+    this.props.navigation.navigate('List Cocktails');
     this.handleRefresh();
   }
 
@@ -96,13 +95,13 @@ export default class SwipeoutDemo extends React.Component {
       <View style={styles.main}>
         <View style={styles.container}>
           <Button
-          title="Add New Cocktail"
+          text="Add New Cocktail"
           onPress={() => this.navigateToAddCocktail()}
         />
           <FlatList
             data={this.state.cocktails}
             renderItem={item => this.renderItemComponent(item)}
-            contentContainerStyle={{ paddingBottom: 80, paddingLeft: 20, paddingRight: 20, paddingTop: 20}}
+            contentContainerStyle={{ paddingBottom: 170, paddingLeft: 20, paddingRight: 20, paddingTop: 20}}
             refreshing={this.state.refreshing}
             onRefresh={this.handleRefresh}
           />
@@ -124,6 +123,8 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 25,
     paddingTop: 5,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: "sans-serif-light",
+    fontWeight: '500'
   }
 });

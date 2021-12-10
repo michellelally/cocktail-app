@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { ImageBackground, View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
+import React from "react";
+import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
 import { Button, ButtonContainer } from "../components/Button";
-import image from '../assets/harrys.png'
+
 class Preferences extends React.Component {
 
   preferences = [];

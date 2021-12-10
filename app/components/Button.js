@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "rgba(225, 84, 0, 0.9)",
+    backgroundColor: "rgba(0, 0, 0, 0.8)",
     borderRadius: 10,
     paddingVertical: 15,
     alignItems: "center",
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffff",
-    fontSize: 15,
+    fontSize: 17,
     textAlign: "center",
     fontFamily: 'sans-serif-light',
     textTransform: 'uppercase'

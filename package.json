@@ -28,7 +28,6 @@
         "react-native-elements": "^3.4.2",
         "react-native-gesture-handler": "^1.10.3",
         "react-native-image-overlay": "^0.1.2",
-        "react-native-reanimated": "^2.2.4",
         "react-native-safe-area-context": "^3.3.2",
         "react-native-screens": "^3.9.0",
         "react-native-super-grid": "^4.1.3",

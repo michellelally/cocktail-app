@@ -29,10 +29,10 @@ const MainStackNavigator = () => {
       <Stack.Screen name="List Cocktails"  options={{ headerShown: false }} component={ListCocktails} />
       <Stack.Screen name="Preferences" component={Preferences} />
       <Stack.Screen name="DisplayCocktails" options={{ headerShown: false }} component={DisplayCocktails} />
-      <Stack.Screen name="AddCocktail" component={AddCocktail} />
+      <Stack.Screen name="Add Cocktail" component={AddCocktail} />
       <Stack.Screen name="Update Cocktail" component={UpdateCocktail} />
       <Stack.Screen name="Menu" component={Menu} />
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Staff Login" component={Login} />
 
     </Stack.Navigator>
 
@@ -43,7 +43,7 @@ const MainStackNavigator = () => {
 const LoginStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Staff Login" component={Login} />
     </Stack.Navigator>
   );
 };

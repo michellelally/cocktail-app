@@ -154,9 +154,11 @@ app.post('/api/suggestions', function (req, res) {
 app.post("/recommend", (req, res) => {
     console.log('/recommend');
 
+    console.log("key:", req.body.key)
     let userId = req.body.key;
     if (userId > 40) {
-        this.userId = 41
+        var num = Math.floor(Math.random() * 40 + 1);
+        userId = num
     } else {
         let recs = model.recommend(userId)
             .then((recs) => {

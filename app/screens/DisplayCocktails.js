@@ -140,7 +140,7 @@ class DisplayCocktails extends React.Component {
                                     style={{ ...styles.modalToggle, ...styles.modalClose }}
                                     onPress={() => this.setState({ modalOpen: false })}
                                 />
-                                <Text style={styles.text}>Others also liked </Text>
+                                <Text style={styles.recsTitle}>Others also liked</Text>
                                 <FlatList
                                     data={this.state.recommendations}
                                     ItemSeparatorComponent={this.ItemSeparator}
@@ -191,18 +191,18 @@ const styles = StyleSheet.create({
         marginTop: 0
     },
     modalView: {
-        marginTop: 30,
+        marginTop: 50,
         borderRadius: 20,
-        backgroundColor: 'rgb(252, 249, 247)',
-
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2
-        // },
-        // shadowOpacity: 0.25,
-        // shadowRadius: 4,
-        // elevation: 5
+        backgroundColor: 'rgba(190, 169, 180)',
+    },
+    recsTitle: {
+        color: "#000000",
+        marginTop: 20,
+        fontSize: 20,
+        textAlign: "center",
+        fontWeight: "600",
+        fontFamily: 'sans-serif-light',
+        textTransform: 'uppercase'
     },
     text: {
         textAlign: "center",

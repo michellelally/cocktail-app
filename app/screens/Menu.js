@@ -39,7 +39,7 @@ class Menu extends React.Component {
     renderItemComponent = (data) =>
         <TouchableOpacity style={styles.container}>
             <View style={{ textAlign: "center" }}>
-                <Text style={styles.text}> {data.item.name}</Text>
+                <Text style={styles.titleText}> {data.item.name}</Text>
                 <Text style={styles.text}> {data.item.ingredients}</Text>
             </View>
 
@@ -80,6 +80,13 @@ const styles = StyleSheet.create({
     image: {
         height: '100%',
         borderRadius: 4
+    },
+    titleText: {
+        textAlign: "center",
+        fontSize: 20,
+        color: '#000000',
+        fontFamily: 'sans-serif-light',
+        fontWeight: '800'
     }
 });
 

@@ -37,8 +37,8 @@ export default class SwipeoutDemo extends React.Component {
     this.setState({ refreshing: false }, () => { this.fectchCocktails() }); // call fetchCocktails after setting the state
   }
 
-  navigateToAddCocktail(key) {
-    this.props.navigation.navigate("AddCocktail")
+  navigateToAddCocktail() {
+    this.props.navigation.navigate("Add Cocktail")
   }
 
   edit(cocktail) {

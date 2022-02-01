@@ -77,6 +77,7 @@ export default class UpdateCocktail extends React.Component {
         })
         this.props.navigation.navigate("List Cocktails")
     }
+    
     render() {
         return (
             <View style={styles.container}>
@@ -165,7 +166,8 @@ const styles = StyleSheet.create({
         margin: 5,
         backgroundColor: '#FFF',
         borderRadius: 6,
-        fontSize: 15
+        fontSize: 15,
+        paddingLeft: 15
 
     },
     inputBox: {

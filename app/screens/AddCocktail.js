@@ -58,59 +58,62 @@ export default class AddCocktail extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.error}>{this.state.error}</Text>
-                <TextInput style={styles.inputBox}
+                <TextInput 
+                    style={styles.textInput}
                     placeholder="Enter name"
                     onChangeText={this.handleName}
                 />
 
-                <Picker
-                    selectedValue={this.state.spirit}
-                    style={styles.inputBox}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({ spirit: itemValue })
-                    }>
-                    <Picker.Item label="Select a spirit" />
-                    <Picker.Item label="Vodka" value="Vodka" />
-                    <Picker.Item label="Whiskey" value="Whiskey" />
-                    <Picker.Item label="Rum" value="Rum" />
-                    <Picker.Item label="Gin" value="Gin" />
-                    <Picker.Item label="Other" value="Other" />
-                </Picker>
+                <View style={styles.picker}>
+                    <Picker
+                        selectedValue={this.state.spirit}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ spirit: itemValue })
+                        }>
+                        <Picker.Item label="Select a spirit" />
+                        <Picker.Item label="Vodka" value="Vodka" />
+                        <Picker.Item label="Whiskey" value="Whiskey" />
+                        <Picker.Item label="Rum" value="Rum" />
+                        <Picker.Item label="Gin" value="Gin" />
+                        <Picker.Item label="Other" value="Other" />
+                    </Picker>
+                </View>
 
-                <Picker
-                    selectedValue={this.state.description}
-                    style={styles.inputBox}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({ description: itemValue })
-                    }>
-                    <Picker.Item label="Select a flavour description" />
-                    <Picker.Item label="Sweet" value="Sweet" />
-                    <Picker.Item label="Refreshing" value="Refreshing" />
-                    <Picker.Item label="Sour" value="Sour" />
-                    <Picker.Item label="Boozy" value="Boozy" />
-                </Picker>
+                <View style={styles.picker}>
+                    <Picker
+                        selectedValue={this.state.description}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ description: itemValue })
+                        }>
+                        <Picker.Item label="Select a flavour description" />
+                        <Picker.Item label="Sweet" value="Sweet" />
+                        <Picker.Item label="Refreshing" value="Refreshing" />
+                        <Picker.Item label="Sour" value="Sour" />
+                        <Picker.Item label="Boozy" value="Boozy" />
+                    </Picker>
+                </View>
 
-                <TextInput style={styles.input}
+                <TextInput 
+                    style={styles.textInput}
                     placeholder="Enter Ingredients"
-                    style={styles.inputBox}
                     onChangeText={this.handleIngredients}
                 />
 
-                <Picker
-                    selectedValue={this.state.glass}
-                    style={styles.inputBox}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({ glass: itemValue })
-                    }>
-                    <Picker.Item label="Select a glass" />
-                    <Picker.Item label="Coupe" value={coupe} />
-                    <Picker.Item label="Tikki" value={hurricane} />
-                    <Picker.Item label="Collins" value={collins} />
-                    <Picker.Item label="Rocks" value={rocks} />
-                    <Picker.Item label="Margarita" value={margarita} />
-                    <Picker.Item label="Jug" value={jug} />
-                </Picker>
+                <View style={styles.picker}>
+                    <Picker
+                        selectedValue={this.state.glass}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({ glass: itemValue })
+                        }>
+                        <Picker.Item label="Select a glass" />
+                        <Picker.Item label="Coupe" value={coupe} />
+                        <Picker.Item label="Tikki" value={hurricane} />
+                        <Picker.Item label="Collins" value={collins} />
+                        <Picker.Item label="Rocks" value={rocks} />
+                        <Picker.Item label="Margarita" value={margarita} />
+                        <Picker.Item label="Jug" value={jug} />
+                    </Picker>
+                </View>
 
                 <View style={{ marginLeft: 50, marginRight: 50 }}>
                     <Button
@@ -127,20 +130,29 @@ export default class AddCocktail extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    textInput: {
+        height: 50,
+        margin: 5,
+        backgroundColor: '#FFF',
+        borderRadius: 6,
+        fontSize: 15,
+        paddingLeft: 15
+    },
     inputBox: {
         height: 50,
         margin: 3,
         backgroundColor: '#FFF',
         borderRadius: 6,
-        fontFamily: "sans-serif-light",
-        fontSize: 17
     },
     itemText: {
         fontSize: 25,
         paddingTop: 5,
         textAlign: "center"
     },
-    error: {
-        color: 'red'
-    }
+    picker: {
+        height: 50,
+        margin: 5,
+        backgroundColor: '#fff',
+        borderRadius: 6,
+    },
 });

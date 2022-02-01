@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     fontWeight: "600",
-    fontFamily: 'Poppins-ExtraLight.ttf'
+    fontFamily: 'sans-serif-light'
   },
   image: {
     flex: 1,

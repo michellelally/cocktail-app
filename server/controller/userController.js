@@ -9,8 +9,6 @@ var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 exports.sign_in = function (req, res) {
-  console.log("email: ", req.body.email)
-  console.log("password: ", req.body.password)
   User.findOne({
     email: req.body.email
   }, function (err, user) {

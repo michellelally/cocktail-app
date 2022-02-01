@@ -7,7 +7,7 @@ provided with a recommendation system and staff login to update the menu.
 ## Technologies
 
 - MERN Stack (MongoDB, Express, React Native, Node.js)
-- Tensorflow & 
+- Tensorflow
 - Keras
 - Python
 - Bcrypt

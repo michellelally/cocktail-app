@@ -16,3 +16,8 @@ provided with a recommendation system and staff login to update the menu.
 ## Demo
 
 https://www.youtube.com/watch?v=53Me0jjGtY0
+
+
+## Report
+
+[Final Report](https://github.com/michellelally/cocktail-app/blob/main/report.pdf)
